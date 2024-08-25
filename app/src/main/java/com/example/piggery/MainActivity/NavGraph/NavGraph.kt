@@ -3,6 +3,7 @@ package com.example.piggery.MainActivity.NavGraph
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.*
 import androidx.compose.animation.fadeIn
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -14,6 +15,7 @@ import com.example.piggery.MainActivity.Screens.SplashScreen.TransitionToLogin
 
 @Composable
 fun AppNavGraph(navController: NavHostController) {
+
     NavHost(
         navController = navController,
         startDestination = SplashScreen

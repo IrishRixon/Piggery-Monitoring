@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "121324046707",
+    "project_id": "piggery-3a00a",
+    "storage_bucket": "piggery-3a00a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:121324046707:android:26262d2553165519005d06",
+        "android_client_info": {
+          "package_name": "com.example.piggery"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1DhAnzmd5w6VtDHei6zxBfM7-lay54AQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

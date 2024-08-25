@@ -1,5 +1,6 @@
 package com.example.piggery.MainActivity.Screens.SplashScreen
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -28,11 +29,11 @@ import kotlinx.coroutines.delay
 @Composable
 fun TransitionToLogin(navController: NavController) {
     Splash()
-
     LaunchedEffect(key1 = true) {
         delay(2000)
-        navController.popBackStack()
         navController.navigate(LogIn)
+        Log.e("Error", "Hello")
+        navController.popBackStack()
     }
 }
 

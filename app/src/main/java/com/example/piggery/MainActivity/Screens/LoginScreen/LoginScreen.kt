@@ -1,5 +1,6 @@
 package com.example.piggery.MainActivity.Screens.LoginScreen
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,10 +21,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.piggery.MainActivity.Screens.ImageComposables.PigCageImage
 import com.example.piggery.MainActivity.UIComponents.EmailOutlineTextField
 import com.example.piggery.MainActivity.UIComponents.LoginButton
 import com.example.piggery.MainActivity.UIComponents.PasswordOutlineTextField
+import com.example.piggery.MainActivity.ViewModel.TextFieldViewModel
 import com.example.piggery.R
 import com.example.piggery.ui.theme.PacificCyan5
 import com.example.piggery.ui.theme.Snow60
@@ -31,6 +34,8 @@ import com.example.piggery.ui.theme.Snow60
 @Composable
 @Preview
 fun LoginScreen() {
+    val viewModel: TextFieldViewModel = viewModel()
+
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -64,7 +69,7 @@ fun LoginScreen() {
                 PasswordOutlineTextField()
 
                 Spacer(modifier = Modifier.height(20.dp))
-                LoginButton()
+                LoginButton {  }
             }
         }
     }
