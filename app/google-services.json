@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "621259974625",
+    "project_id": "dolpiggery",
+    "storage_bucket": "dolpiggery.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:621259974625:android:837506e96a809feab994a0",
+        "android_client_info": {
+          "package_name": "com.example.dolpiggery"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuL4Y76XuPKzsmmiqhsuS1G1-WubNgyqA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
