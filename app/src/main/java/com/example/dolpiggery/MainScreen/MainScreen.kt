@@ -49,7 +49,7 @@ class MainScreen : ComponentActivity() {
                         TopAppBar(
                             title = {
                                 Text(
-                                    text = "Doldolpiggery",
+                                    text = "Dolpiggery",
                                     fontFamily = FontFamily(Font(R.font.roboto_medium)),
                                 )
                             },
@@ -66,43 +66,16 @@ class MainScreen : ComponentActivity() {
                     }
                 ) { innerPadding ->
                     Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.Start,
+                        verticalArrangement = Arrangement.Top,
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(innerPadding)
                     ) {
                         AppNavGraph(navController = navController)
-//                        DisplayText()
                     }
                 }
             }
         }
     }
-}
-@Composable
-fun DisplayText() {
-    var dat by remember {
-        mutableStateOf("hello")
-    }
-
-    val firebaseDatabse = FirebaseDatabase.getInstance().getReference().child("MAX30102")
-
-    firebaseDatabse.addValueEventListener(object : ValueEventListener {
-        override fun onDataChange(snapshot: DataSnapshot) {
-            if (snapshot.exists()) {
-                Log.i("Hey", "Exists")
-                dat = snapshot.value.toString()
-            } else {
-                Log.i("Hey", "Does not exist")
-            }
-            Log.i("Hey", "execute anyway")
-        }
-
-        override fun onCancelled(error: DatabaseError) {
-            Log.i("Information", "Database Error: $error")
-        }
-    })
-
-    Text(text = dat)
 }

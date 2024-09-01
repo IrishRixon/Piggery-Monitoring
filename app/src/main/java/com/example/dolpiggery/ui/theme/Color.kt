@@ -14,3 +14,5 @@ val Snow60 = Color(0xFFF6F1F1)
 val LightBlue30 = Color(0xFFAFD3E2)
 val PacificCyan5 = Color(0xFF19A7CE)
 val Cerulean5 = Color(0xFF146C94)
+
+val LimeGreen = Color(0xFF2BD041)
