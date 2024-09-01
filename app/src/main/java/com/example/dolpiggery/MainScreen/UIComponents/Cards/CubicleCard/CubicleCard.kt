@@ -36,8 +36,9 @@ import com.example.dolpiggery.ui.theme.LimeGreen
 import com.example.dolpiggery.ui.theme.Snow60
 
 @Composable
-@Preview
-fun CubicleCard() {
+fun CubicleCard(
+    cubicleID: Int
+) {
 
     var sprinklerSwitch by rememberSaveable {
         mutableStateOf(false)
@@ -68,15 +69,20 @@ fun CubicleCard() {
                     .fillMaxSize()
                     .padding(16.dp)
             ) {
-                Column(
-                    modifier = Modifier
-                        .width(100.dp)
-                        .fillMaxHeight()
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.pig_cage),
-                        contentDescription = null
-                    )
+                Row {
+                    Column(
+                        modifier = Modifier
+                            .width(100.dp)
+                            .fillMaxHeight()
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.pig_cage),
+                            contentDescription = null
+                        )
+                    }
+
+                    Text(text = "Cubicle $cubicleID")
+
                 }
 
                 Column(

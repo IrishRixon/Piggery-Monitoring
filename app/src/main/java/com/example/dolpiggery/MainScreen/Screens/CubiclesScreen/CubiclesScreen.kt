@@ -15,5 +15,5 @@ import com.example.dolpiggery.MainScreen.ViewModel.Cubicles.CubiclesViewModel
 fun CubicleScreen() {
     val viewModel: CubiclesViewModel = viewModel()
 
-    CubicleCard()
+    CubicleCard(1)
 }
