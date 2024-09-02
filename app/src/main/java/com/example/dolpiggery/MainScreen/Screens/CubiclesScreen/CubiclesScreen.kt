@@ -25,22 +25,19 @@ import com.example.dolpiggery.ui.theme.Snow60
 fun CubicleScreen() {
     val viewModel: CubiclesViewModel = viewModel()
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Snow60)
-            .padding(16.dp)
-    ) {
         LaunchedEffect(key1 = Unit) {
             viewModel.addCubicles()
-//            Log.i("Hey", "${viewModel.cubicleList.size}")
         }
 
         if(viewModel.cubicleList.isEmpty()) {
             Text(text = "Loading ... ", fontSize = 20.sp)
         }
         else {
-            LazyColumn {
+            LazyColumn (
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(10.dp)
+            ){
                 items(viewModel.cubicleList) {
                     CubicleCard(
                         cubicleID = it.cubicleID,
@@ -50,7 +47,7 @@ fun CubicleScreen() {
                 }
             }
         }
-    }
+
 
 //    CubicleCard(1)
 }

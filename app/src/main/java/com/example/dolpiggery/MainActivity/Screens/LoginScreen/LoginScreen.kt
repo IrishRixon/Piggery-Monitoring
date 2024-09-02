@@ -8,20 +8,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.dolpiggery.Context
+import com.example.dolpiggery.MainActivity.MainActivityContext
 import com.example.dolpiggery.MainActivity.Screens.ImageComposables.PigCageImage
 import com.example.dolpiggery.MainActivity.UIComponents.EmailOutlineTextField
 import com.example.dolpiggery.MainActivity.UIComponents.LoginButton
@@ -69,7 +66,7 @@ fun LoginScreen() {
                 PasswordOutlineTextField()
 
                 Spacer(modifier = Modifier.height(20.dp))
-                LoginButton { viewModel.loginUser(Context.getContext()) }
+                LoginButton { viewModel.loginUser(MainActivityContext.getContext()) }
             }
         }
     }

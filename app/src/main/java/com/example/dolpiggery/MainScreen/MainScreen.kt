@@ -38,6 +38,7 @@ import com.google.firebase.database.ValueEventListener
 class MainScreen : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
+        MainScreenContext.setContext(this)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {

@@ -1,12 +1,10 @@
-package com.example.dolpiggery
+package com.example.dolpiggery.MainActivity
 
-import com.example.dolpiggery.MainActivity.MainActivity
-
-object Context {
+object MainActivityContext {
     private lateinit var context: MainActivity
 
     fun setContext(context: MainActivity) {
-        Context.context = context
+        MainActivityContext.context = context
     }
 
     fun getContext(): MainActivity {

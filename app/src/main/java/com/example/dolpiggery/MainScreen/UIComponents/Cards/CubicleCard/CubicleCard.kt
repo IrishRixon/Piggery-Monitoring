@@ -31,6 +31,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.dolpiggery.MainScreen.ViewModel.Cubicles.CubiclesViewModel
 import com.example.dolpiggery.R
 import com.example.dolpiggery.ui.theme.LimeGreen
 import com.example.dolpiggery.ui.theme.Snow60
@@ -42,14 +44,7 @@ fun CubicleCard(
     broomTint: Boolean
 ) {
 
-//    var sprinklerSwitch by rememberSaveable {
-//        mutableStateOf(sprinklerSwitch)
-//    }
-//
-//    var broomTint by rememberSaveable {
-//        mutableStateOf(broomTint)
-//    }
-
+    val viewModel: CubiclesViewModel = viewModel()
 
     Card(
         onClick = { /*TODO*/ },
@@ -58,6 +53,7 @@ fun CubicleCard(
         modifier = Modifier
             .height(120.dp)
             .fillMaxWidth()
+            .padding(6.dp)
     ) {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -110,7 +106,7 @@ fun CubicleCard(
 
                     Switch(
                         checked = sprinklerSwitch,
-                        onCheckedChange = {  },
+                        onCheckedChange = { viewModel.toggleSprinklerSwitch(sprinklerSwitch, cubicleID) },
                         thumbContent = {
                             Icon(
                                 painter = painterResource(id = if (!sprinklerSwitch) R.drawable.shower_off else R.drawable.shower_on),

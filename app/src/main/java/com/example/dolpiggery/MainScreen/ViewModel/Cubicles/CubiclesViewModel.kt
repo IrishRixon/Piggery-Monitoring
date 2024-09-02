@@ -18,4 +18,8 @@ class CubiclesViewModel : ViewModel() {
        }
     }
 
+    fun toggleSprinklerSwitch(currentSatus: Boolean ,cubicleID: Int) {
+        cubiclesRepository.toggleSprinklerSwitch(currentSatus, cubicleID)
+    }
+
 }

@@ -1,8 +1,10 @@
 package com.example.dolpiggery.MainScreen.Repository.Cubicles
 
 import android.util.Log
+import android.widget.Toast
 import com.example.dolpiggery.MainScreen.DataClass.Cubicle.CubicleDataClass
 import com.example.dolpiggery.MainScreen.DataClass.Pig.PigDataClass
+import com.example.dolpiggery.MainScreen.MainScreenContext
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -35,7 +37,7 @@ class CubiclesRepository {
                                 else if (child.key.equals("valve_switch", true)) {
                                     valveSwitch = child.value.toString().toBoolean()
                                 }
-                                else if (child.key.equals("Cubicle_ID", true)) {
+                                else if (child.key.equals("isNeededClean", true)) {
                                     isNeededClean = child.value.toString().toBoolean()
                                 }
                                 else if(child.key?.contains("Pig", true) == true) {
@@ -57,7 +59,7 @@ class CubiclesRepository {
                                 }
                             }
 
-                            val item = CubicleDataClass(cubicleID, valveSwitch, isNeededClean, pigDataClassList)
+                            val item = CubicleDataClass(cubicleID, isNeededClean, valveSwitch, pigDataClassList)
                             cubicleList.add(item)
                         }
                     }
@@ -66,9 +68,17 @@ class CubiclesRepository {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                Toast.makeText(MainScreenContext.getContext(), "$error", Toast.LENGTH_SHORT).show()
             }
 
         })
+    }
+
+    fun toggleSprinklerSwitch(currentStatus: Boolean ,cubicleID: Int) {
+        val newStatus = !currentStatus
+        databaseRef.child("Cubicle_$cubicleID").child("Valve_switch").setValue(newStatus)
+            .addOnFailureListener {
+                Toast.makeText(MainScreenContext.getContext(), "$it", Toast.LENGTH_SHORT).show()
+            }
     }
 }
