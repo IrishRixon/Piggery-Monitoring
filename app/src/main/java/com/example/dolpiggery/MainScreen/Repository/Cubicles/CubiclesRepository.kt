@@ -1,5 +1,6 @@
 package com.example.dolpiggery.MainScreen.Repository.Cubicles
 
+import android.util.Log
 import com.example.dolpiggery.MainScreen.DataClass.Cubicle.CubicleDataClass
 import com.example.dolpiggery.MainScreen.DataClass.Pig.PigDataClass
 import com.google.firebase.database.DataSnapshot
@@ -10,51 +11,57 @@ import com.google.firebase.database.ValueEventListener
 class CubiclesRepository {
     val databaseRef = FirebaseDatabase.getInstance().getReference()
 
-    fun getCubiclesList(onDataChange: (List<CubicleDataClass>) -> Unit) {
+    fun getCubiclesList(onDataChanged: (List<CubicleDataClass>) -> Unit) {
         databaseRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                var cubicleID: Int = -1
-                var valveSwitch: Boolean = false
-                var isNeededClean: Boolean = false
+                var cubicleID = 0
+                var valveSwitch = false
+                var isNeededClean = false
 
-                var pigDataClassList: List<PigDataClass>
-                var bpm: Int = -1
-                var bodyTemp: Int = -1
-                var pigID: Int = -1
+                val pigDataClassList = mutableListOf<PigDataClass>()
+                var bpm = 0
+                var bodyTemp = 0
+                var pigID = 0
 
-                val list = mutableListOf<CubicleDataClass>()
+                val cubicleList = mutableListOf<CubicleDataClass>()
                 if (snapshot.exists()) {
                     for (cubicle in snapshot.children) {
                         if(cubicle.key?.contains("Cubicle", true) == true){
                             for (child in cubicle.children) {
                                 if (child.key.equals("Cubicle_ID", true)) {
-                                    cubicleID = child.value as Int
+                                    cubicleID = child.value.toString().toInt()
+                                    Log.i("Hey", "$cubicleID")
                                 }
                                 else if (child.key.equals("valve_switch", true)) {
-                                    valveSwitch = child.value as Boolean
+                                    valveSwitch = child.value.toString().toBoolean()
                                 }
                                 else if (child.key.equals("Cubicle_ID", true)) {
-                                    isNeededClean = child.value as Boolean
+                                    isNeededClean = child.value.toString().toBoolean()
                                 }
                                 else if(child.key?.contains("Pig", true) == true) {
                                     for(piglet in child.children) {
                                         if(piglet.key.equals("BPM", true)) {
-                                            bpm = piglet.value as Int
+                                            bpm = piglet.value.toString().toInt()
                                         }
                                         else if(piglet.key.equals("BodyTemp", true)) {
-                                            bodyTemp = piglet.value as Int
+                                            bodyTemp = piglet.value.toString().toInt()
                                         }
                                         else if(piglet.key?.contains("Pig") == true) {
-                                            pigID = piglet.value as Int
+                                            pigID = piglet.value.toString().toInt()
                                         }
                                     }
+                                    //continue making lists
                                     val pigItem = PigDataClass(pigID, bpm, bodyTemp)
+                                    pigDataClassList.add(pigItem)
+
                                 }
                             }
 
                             val item = CubicleDataClass(cubicleID, valveSwitch, isNeededClean, pigDataClassList)
+                            cubicleList.add(item)
                         }
                     }
+                    onDataChanged(cubicleList)
                 }
             }
 

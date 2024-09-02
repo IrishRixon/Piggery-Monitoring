@@ -37,97 +37,99 @@ import com.example.dolpiggery.ui.theme.Snow60
 
 @Composable
 fun CubicleCard(
-    cubicleID: Int
+    cubicleID: Int,
+    sprinklerSwitch: Boolean,
+    broomTint: Boolean
 ) {
 
-    var sprinklerSwitch by rememberSaveable {
-        mutableStateOf(false)
-    }
+//    var sprinklerSwitch by rememberSaveable {
+//        mutableStateOf(sprinklerSwitch)
+//    }
+//
+//    var broomTint by rememberSaveable {
+//        mutableStateOf(broomTint)
+//    }
 
-    var broomTint by rememberSaveable {
-        mutableStateOf(false)
-    }
 
-    Box(
+    Card(
+        onClick = { /*TODO*/ },
+        elevation = CardDefaults.cardElevation(5.dp),
+        colors = CardDefaults.cardColors(Snow60),
         modifier = Modifier
-            .fillMaxSize()
-            .background(Snow60)
-            .padding(16.dp)
-    )
-    {
-        Card(
-            onClick = { /*TODO*/ },
-            elevation = CardDefaults.cardElevation(5.dp),
-            colors = CardDefaults.cardColors(Snow60),
+            .height(120.dp)
+            .fillMaxWidth()
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier
-                .height(120.dp)
-                .fillMaxWidth()
+                .fillMaxSize()
+                .padding(16.dp)
         ) {
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp)
-            ) {
-                Row {
-                    Column(
-                        modifier = Modifier
-                            .width(100.dp)
-                            .fillMaxHeight()
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.pig_cage),
-                            contentDescription = null
-                        )
-                    }
-
-                    Text(text = "Cubicle $cubicleID")
-
-                }
-
+            Row {
                 Column(
-                    verticalArrangement = Arrangement.SpaceBetween,
-                    horizontalAlignment = Alignment.End,
                     modifier = Modifier
-                        .width(120.dp)
+                        .width(100.dp)
                         .fillMaxHeight()
                 ) {
-                    Box{
-                        Icon(
-                            painter = painterResource(id = R.drawable.broom1),
-                            tint = if(!broomTint) Color.Black else Color.Red,
-                            contentDescription = null,
-                            modifier = Modifier.size(35.dp)
-                        )
-                    }
+                    Image(
+                        painter = painterResource(id = R.drawable.pig_cage),
+                        contentDescription = null
+                    )
+                }
 
-                    Row (
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        modifier = Modifier.fillMaxWidth()
-                    ){
-                        Text(text = "10:00", fontSize = 20.sp, color = if(sprinklerSwitch) Color.Black else Snow60 )
+                Text(text = "Cubicle $cubicleID")
 
-                        Switch(
-                            checked = sprinklerSwitch,
-                            onCheckedChange = { sprinklerSwitch = it },
-                            thumbContent = { Icon(
-                                painter = painterResource(id = if(!sprinklerSwitch) R.drawable.shower_off else R.drawable.shower_on ),
+            }
+
+            Column(
+                verticalArrangement = Arrangement.SpaceBetween,
+                horizontalAlignment = Alignment.End,
+                modifier = Modifier
+                    .width(120.dp)
+                    .fillMaxHeight()
+            ) {
+                Box {
+                    Icon(
+                        painter = painterResource(id = R.drawable.broom1),
+                        tint = if (!broomTint) Color.Black else Color.Red,
+                        contentDescription = null,
+                        modifier = Modifier.size(35.dp)
+                    )
+                }
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text = "10:00",
+                        fontSize = 20.sp,
+                        color = if (sprinklerSwitch) Color.Black else Snow60
+                    )
+
+                    Switch(
+                        checked = sprinklerSwitch,
+                        onCheckedChange = {  },
+                        thumbContent = {
+                            Icon(
+                                painter = painterResource(id = if (!sprinklerSwitch) R.drawable.shower_off else R.drawable.shower_on),
                                 contentDescription = null,
                                 modifier = Modifier.size(18.dp)
-                            )},
-                            colors = SwitchDefaults.colors(
-                                uncheckedTrackColor = Color.Gray,
-                                uncheckedThumbColor = Snow60,
-                                checkedTrackColor = LimeGreen,
-                                checkedThumbColor = Snow60,
-                                checkedIconColor = Color.Black,
-                                uncheckedIconColor = Color.Gray
                             )
+                        },
+                        colors = SwitchDefaults.colors(
+                            uncheckedTrackColor = Color.Gray,
+                            uncheckedThumbColor = Snow60,
+                            checkedTrackColor = LimeGreen,
+                            checkedThumbColor = Snow60,
+                            checkedIconColor = Color.Black,
+                            uncheckedIconColor = Color.Gray
                         )
-                    }
+                    )
                 }
             }
         }
     }
 }
+
