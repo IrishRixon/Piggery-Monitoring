@@ -1,5 +1,6 @@
 package com.example.dolpiggery.MainScreen.NavGraph
 
+import android.util.Log
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.tween
@@ -12,10 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.toRoute
 import com.example.dolpiggery.MainScreen.NavRoutes.Cubicle
+import com.example.dolpiggery.MainScreen.NavRoutes.Detail
 import com.example.dolpiggery.MainScreen.NavRoutes.Environment
 import com.example.dolpiggery.MainScreen.NavRoutes.Settings
 import com.example.dolpiggery.MainScreen.Screens.CubiclesScreen.CubicleScreen
+import com.example.dolpiggery.MainScreen.Screens.CubiclesScreen.DetailsScreen.DetailScreen
 import com.example.dolpiggery.MainScreen.Screens.EnvironmentScreen.EnvironmentScreen
 import com.example.dolpiggery.MainScreen.Screens.SettingsScreen.SettingsScreen
 
@@ -30,8 +34,15 @@ fun AppNavGraph(navController: NavHostController) {
 //        modifier = Modifier.fillMaxSize()
     ) {
         composable<Cubicle> {
-            CubicleScreen()
+            CubicleScreen(navController)
         }
+//        composable<Detail> {
+//            val args = it.toRoute<Detail>()
+//            val cubicleID = args.cubicleID
+//            val pigList = args.pigList
+//
+//            DetailScreen(cubicleID, pigList)
+//        }
         composable<Environment> {
             EnvironmentScreen()
         }

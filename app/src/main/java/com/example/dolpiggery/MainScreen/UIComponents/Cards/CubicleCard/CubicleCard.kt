@@ -32,6 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.dolpiggery.MainScreen.DataClass.Pig.PigDataClass
 import com.example.dolpiggery.MainScreen.ViewModel.Cubicles.CubiclesViewModel
 import com.example.dolpiggery.R
 import com.example.dolpiggery.ui.theme.LimeGreen
@@ -41,13 +42,14 @@ import com.example.dolpiggery.ui.theme.Snow60
 fun CubicleCard(
     cubicleID: Int,
     sprinklerSwitch: Boolean,
-    broomTint: Boolean
+    broomTint: Boolean,
+    onItemClick: () -> Unit
 ) {
 
     val viewModel: CubiclesViewModel = viewModel()
 
     Card(
-        onClick = { /*TODO*/ },
+        onClick = { onItemClick() },
         elevation = CardDefaults.cardElevation(5.dp),
         colors = CardDefaults.cardColors(Snow60),
         modifier = Modifier

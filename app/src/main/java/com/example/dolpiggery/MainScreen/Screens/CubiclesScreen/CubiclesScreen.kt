@@ -17,37 +17,42 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import com.example.dolpiggery.MainScreen.NavRoutes.Detail
 import com.example.dolpiggery.MainScreen.UIComponents.Cards.CubicleCard.CubicleCard
 import com.example.dolpiggery.MainScreen.ViewModel.Cubicles.CubiclesViewModel
 import com.example.dolpiggery.ui.theme.Snow60
 
 @Composable
-fun CubicleScreen() {
+fun CubicleScreen(navController: NavHostController) {
     val viewModel: CubiclesViewModel = viewModel()
+    LaunchedEffect(key1 = Unit) {
+        viewModel.addCubicles()
+    }
 
-        LaunchedEffect(key1 = Unit) {
-            viewModel.addCubicles()
-        }
-
-        if(viewModel.cubicleList.isEmpty()) {
-            Text(text = "Loading ... ", fontSize = 20.sp)
-        }
-        else {
-            LazyColumn (
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(10.dp)
-            ){
-                items(viewModel.cubicleList) {
-                    CubicleCard(
-                        cubicleID = it.cubicleID,
-                        sprinklerSwitch = it.sprinklerSwitch,
-                        broomTint = it.isNeedCleaning
-                    )
-                }
+    if (viewModel.cubicleList.isEmpty()) {
+        Text(text = "Loading ... ", fontSize = 20.sp)
+    } else {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(10.dp)
+        ) {
+            items(viewModel.cubicleList) {
+                CubicleCard(
+                    cubicleID = it.cubicleID,
+                    sprinklerSwitch = it.sprinklerSwitch,
+                    broomTint = it.isNeedCleaning,
+                    onItemClick = {
+//                        navController.navigate(
+//                            Detail(
+//                                cubicleID = it.cubicleID,
+//                                pigList = it.pigDataClassList
+//                            )
+//                        )
+                    }
+                )
             }
         }
-
-
-//    CubicleCard(1)
+    }
 }

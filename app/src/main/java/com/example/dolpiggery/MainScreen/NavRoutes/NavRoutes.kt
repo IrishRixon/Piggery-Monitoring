@@ -1,5 +1,7 @@
 package com.example.dolpiggery.MainScreen.NavRoutes
 
+import com.example.dolpiggery.MainScreen.DataClass.Pig.PigDataClass
+import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -10,3 +12,9 @@ object Environment
 
 @Serializable
 object Settings
+
+@Serializable
+data class Detail (
+    val cubicleID: Int,
+    val pigList: List<@Contextual PigDataClass>
+)
