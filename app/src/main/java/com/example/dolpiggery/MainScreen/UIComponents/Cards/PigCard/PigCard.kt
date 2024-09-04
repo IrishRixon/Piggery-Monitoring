@@ -43,8 +43,8 @@ fun PigCard(
             colors = CardDefaults.cardColors(Snow60),
             modifier = Modifier
                 .fillMaxWidth()
-                .height(90.dp)
-                .padding(16.dp)
+                .height(110.dp)
+                .padding(10.dp)
         ) {
             Row (
                 modifier = Modifier

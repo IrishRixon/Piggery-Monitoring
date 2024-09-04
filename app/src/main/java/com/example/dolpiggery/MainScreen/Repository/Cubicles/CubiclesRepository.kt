@@ -20,11 +20,6 @@ class CubiclesRepository {
                 var valveSwitch = false
                 var isNeededClean = false
 
-                val pigDataClassList = mutableListOf<PigDataClass>()
-                var bpm = 0
-                var bodyTemp = 0
-                var pigID = 0
-
                 val cubicleList = mutableListOf<CubicleDataClass>()
                 if (snapshot.exists()) {
                     for (cubicle in snapshot.children) {
@@ -40,26 +35,9 @@ class CubiclesRepository {
                                 else if (child.key.equals("isNeededClean", true)) {
                                     isNeededClean = child.value.toString().toBoolean()
                                 }
-                                else if(child.key?.contains("Pig", true) == true) {
-                                    for(piglet in child.children) {
-                                        if(piglet.key.equals("BPM", true)) {
-                                            bpm = piglet.value.toString().toInt()
-                                        }
-                                        else if(piglet.key.equals("BodyTemp", true)) {
-                                            bodyTemp = piglet.value.toString().toInt()
-                                        }
-                                        else if(piglet.key?.contains("Pig") == true) {
-                                            pigID = piglet.value.toString().toInt()
-                                        }
-                                    }
-                                    //continue making lists
-                                    val pigItem = PigDataClass(pigID, bpm, bodyTemp)
-                                    pigDataClassList.add(pigItem)
-
-                                }
                             }
 
-                            val item = CubicleDataClass(cubicleID, isNeededClean, valveSwitch, pigDataClassList)
+                            val item = CubicleDataClass(cubicleID, isNeededClean, valveSwitch)
                             cubicleList.add(item)
                         }
                     }

@@ -31,7 +31,13 @@ fun CubicleScreen(navController: NavHostController) {
     }
 
     if (viewModel.cubicleList.isEmpty()) {
-        Text(text = "Loading ... ", fontSize = 20.sp)
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Text(text = "Loading ... ", fontSize = 20.sp)
+        }
     } else {
         LazyColumn(
             modifier = Modifier
@@ -44,12 +50,11 @@ fun CubicleScreen(navController: NavHostController) {
                     sprinklerSwitch = it.sprinklerSwitch,
                     broomTint = it.isNeedCleaning,
                     onItemClick = {
-//                        navController.navigate(
-//                            Detail(
-//                                cubicleID = it.cubicleID,
-//                                pigList = it.pigDataClassList
-//                            )
-//                        )
+                        navController.navigate(
+                            Detail(
+                                cubicleID = it.cubicleID,
+                            )
+                        )
                     }
                 )
             }

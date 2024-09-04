@@ -15,6 +15,5 @@ object Settings
 
 @Serializable
 data class Detail (
-    val cubicleID: Int,
-    val pigList: List<@Contextual PigDataClass>
+    val cubicleID: Int
 )

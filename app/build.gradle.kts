@@ -75,4 +75,5 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.navigation.compose)
     implementation("io.coil-kt:coil-compose:2.7.0")
+    implementation ("co.yml:ycharts:2.1.0")
 }

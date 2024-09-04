@@ -36,13 +36,12 @@ fun AppNavGraph(navController: NavHostController) {
         composable<Cubicle> {
             CubicleScreen(navController)
         }
-//        composable<Detail> {
-//            val args = it.toRoute<Detail>()
-//            val cubicleID = args.cubicleID
-//            val pigList = args.pigList
-//
-//            DetailScreen(cubicleID, pigList)
-//        }
+        composable<Detail> {
+            val args = it.toRoute<Detail>()
+            val cubicleID = args.cubicleID
+
+            DetailScreen(cubicleID)
+        }
         composable<Environment> {
             EnvironmentScreen()
         }

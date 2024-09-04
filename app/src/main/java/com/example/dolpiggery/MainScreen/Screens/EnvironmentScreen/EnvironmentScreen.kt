@@ -7,8 +7,5 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun EnvironmentScreen() {
-    Text(
-        text = "Environment",
-        fontSize = 50.sp
-    )
+
 }
