@@ -32,7 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.dolpiggery.MainScreen.DataClass.Pig.PigDataClass
+import com.example.dolpiggery.MainScreen.DataClass.Cubicle.Pig.PigDataClass
 import com.example.dolpiggery.MainScreen.ViewModel.Cubicles.CubiclesViewModel
 import com.example.dolpiggery.R
 import com.example.dolpiggery.ui.theme.LimeGreen

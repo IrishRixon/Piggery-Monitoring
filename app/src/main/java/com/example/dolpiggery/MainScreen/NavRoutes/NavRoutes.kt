@@ -1,6 +1,6 @@
 package com.example.dolpiggery.MainScreen.NavRoutes
 
-import com.example.dolpiggery.MainScreen.DataClass.Pig.PigDataClass
+import com.example.dolpiggery.MainScreen.DataClass.Cubicle.Pig.PigDataClass
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 

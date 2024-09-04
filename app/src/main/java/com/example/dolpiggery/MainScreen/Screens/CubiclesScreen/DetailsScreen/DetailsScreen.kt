@@ -29,7 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.dolpiggery.MainScreen.DataClass.Pig.PigDataClass
+import com.example.dolpiggery.MainScreen.DataClass.Cubicle.Pig.PigDataClass
 import com.example.dolpiggery.MainScreen.UIComponents.Cards.PigCard.PigCard
 import com.example.dolpiggery.MainScreen.ViewModel.Pigs.PigsViewModel
 import com.example.dolpiggery.R

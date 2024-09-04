@@ -3,7 +3,7 @@ package com.example.dolpiggery.MainScreen.Repository.Cubicles
 import android.util.Log
 import android.widget.Toast
 import com.example.dolpiggery.MainScreen.DataClass.Cubicle.CubicleDataClass
-import com.example.dolpiggery.MainScreen.DataClass.Pig.PigDataClass
+import com.example.dolpiggery.MainScreen.DataClass.Cubicle.Pig.PigDataClass
 import com.example.dolpiggery.MainScreen.MainScreenContext
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
