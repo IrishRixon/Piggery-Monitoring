@@ -16,8 +16,8 @@ class PigsRepository {
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 val pigDataClassList = mutableListOf<PigDataClass>()
-                var bpm = 0
-                var bodyTemp = 0
+                var bpm = ""
+                var bodyTemp = ""
                 var pigID = 0
 
                 if(snapshot.exists()) {
@@ -25,10 +25,10 @@ class PigsRepository {
                         if(child.key?.contains("Pig", true) == true) {
                             for(piglet in child.children) {
                                 if(piglet.key.equals("BPM", true)) {
-                                    bpm = piglet.value.toString().toInt()
+                                    bpm = piglet.value.toString()
                                 }
                                 else if(piglet.key.equals("BodyTemp", true)) {
-                                    bodyTemp = piglet.value.toString().toInt()
+                                    bodyTemp = piglet.value.toString()
                                 }
                                 else if(piglet.key?.contains("Pig") == true) {
                                     pigID = piglet.value.toString().toInt()

@@ -33,8 +33,8 @@ import com.example.dolpiggery.ui.theme.Snow60
 @Composable
 fun PigCard(
     pigID: Int,
-    bpm: Int,
-    bodyTemp: Int
+    bpm: String,
+    bodyTemp: String
 ) {
 
         Card(

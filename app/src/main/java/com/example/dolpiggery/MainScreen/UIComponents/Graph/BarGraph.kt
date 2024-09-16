@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
@@ -19,6 +20,7 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import co.yml.charts.axis.AxisConfig
 import co.yml.charts.axis.AxisData
 import co.yml.charts.axis.DataCategoryOptions
@@ -39,67 +41,66 @@ fun BarGraph(
     buwan: String,
     barDataList: List<BarData>
 ) {
-    Box(
+    Log.i("Hey", "Here BarGraph")
+    var i = 0
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .fillMaxSize()
-            .background(Snow60)
+            .padding(top = 20.dp)
     ) {
-        Log.i("Hey", "Here BarGraph")
-        Column(
+
+        Text(text = "$buwan Temperature History", fontSize = 20.sp)
+
+        Row(
             modifier = Modifier
                 .fillMaxSize()
+                .background(Snow60)
+                .padding(10.dp)
         ) {
-//            Text(text = buwan)
-            Row(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Snow60)
-                    .padding(10.dp)
-            ) {
-                val yStepSize = 10
-                val maxRange = 50
+            val yStepSize = 10
+            val maxRange = 50
 
-                val xAxisData = AxisData.Builder()
-                    .axisStepSize(30.dp)
-                    .steps(barDataList.size - 1)
-                    .bottomPadding(40.dp)
-                    .axisLabelAngle(20f)
-                    .startDrawPadding(20.dp)
-                    .labelData { index ->
-                        barDataList[index].label
-                    }
-                    .build()
-
-                val yAxisData = AxisData.Builder()
-                    .steps(10)
-                    .backgroundColor(Snow60)
-                    .labelAndAxisLinePadding(20.dp)
-                    .axisOffset(20.dp)
-                    .labelData { index ->
-                        (index * (maxRange / yStepSize)).toString()
-                    }
-                    .axisConfig(AxisConfig())
-                    .build()
-
-                val barChart = BarChartData(
-                    chartData = barDataList,
-                    xAxisData = xAxisData,
-                    yAxisData = yAxisData,
-                    backgroundColor = Snow60,
-                    paddingEnd = 0.dp,
-                    horizontalExtraSpace = 20.dp,
-                )
-
-                if(barDataList.isNotEmpty()) {
-                    Log.i("Hey", "Here Here")
-                    BarChart(
-                        modifier = Modifier
-                            .height(450.dp)
-                            .background(Snow60),
-                        barChartData = barChart
-                    )
+            val xAxisData = AxisData.Builder()
+                .axisStepSize(30.dp)
+                .steps(barDataList.size - 1)
+                .bottomPadding(40.dp)
+                .axisLabelAngle(20f)
+                .startDrawPadding(20.dp)
+                .labelData { index ->
+                    Log.i("Bar", "$index")
+                    barDataList[index].label
                 }
-            }
+                        .build()
+
+                    val yAxisData = AxisData.Builder()
+                        .steps(10)
+                        .backgroundColor(Snow60)
+                        .labelAndAxisLinePadding(20.dp)
+                        .axisOffset(20.dp)
+                        .labelData { index ->
+                            (index * (maxRange / yStepSize)).toString()
+                        }
+                        .axisConfig(AxisConfig())
+                        .build()
+
+                    val barChart = BarChartData(
+                        chartData = barDataList,
+                        xAxisData = xAxisData,
+                        yAxisData = yAxisData,
+                        backgroundColor = Snow60,
+                        paddingEnd = 0.dp,
+                        horizontalExtraSpace = 20.dp,
+                    )
+
+                    if (barDataList.isNotEmpty()) {
+                        Log.i("Hey", "Here Here")
+                        BarChart(
+                            modifier = Modifier
+                                .height(450.dp)
+                                .background(Snow60),
+                            barChartData = barChart
+                        )
+                    }
+                }
         }
     }
-}

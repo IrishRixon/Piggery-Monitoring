@@ -16,3 +16,4 @@ val PacificCyan5 = Color(0xFF19A7CE)
 val Cerulean5 = Color(0xFF146C94)
 
 val LimeGreen = Color(0xFF2BD041)
+val Platinum = Color(0xFFE3E3E2)

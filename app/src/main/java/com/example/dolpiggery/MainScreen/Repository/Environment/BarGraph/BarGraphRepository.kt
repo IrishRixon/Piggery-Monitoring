@@ -1,6 +1,5 @@
-package com.example.dolpiggery.MainScreen.Repository.Environment
+package com.example.dolpiggery.MainScreen.Repository.Environment.BarGraph
 
-import android.util.Log
 import android.widget.Toast
 import com.example.dolpiggery.MainScreen.DataClass.Environment.BarGraph.BarGraphDataClass
 import com.example.dolpiggery.MainScreen.MainScreenContext
@@ -23,13 +22,12 @@ class BarGraphRepository {
                 if(snapshot.exists()) {
                     for (month in snapshot.children) {
                         if(month.key.equals(LocalDate.now().month.toString(), true)) {
-//                            Log.i("Hey", "helo")
                             val buwan = month.key.toString()
 
                             for(day in month.children) {
                                 araw = day.key.toString().toInt()
-                                if(day.child("temp").exists()) {
-                                    temp = day.child("temp").value.toString().toInt()
+                                if(day.child("Temp").exists()) {
+                                    temp = day.child("Temp").value.toString().toInt()
                                 }
 
                                 list.add(BarGraphDataClass(araw, temp))
