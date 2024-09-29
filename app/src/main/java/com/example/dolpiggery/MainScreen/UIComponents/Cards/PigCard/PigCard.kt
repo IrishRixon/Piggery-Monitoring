@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.dolpiggery.R
 import com.example.dolpiggery.ui.theme.Snow60
+import java.util.Locale
 
 @Composable
 fun PigCard(
@@ -36,7 +37,8 @@ fun PigCard(
     bpm: String,
     bodyTemp: String
 ) {
-
+    val bodyTempFloat = bodyTemp.toDoubleOrNull() ?: 0.0
+    val formattedBodyTemp = String.format(Locale.getDefault(),"%.1f", bodyTempFloat)
         Card(
             onClick = { /*TODO*/ },
             elevation = CardDefaults.cardElevation(5.dp),
@@ -83,7 +85,7 @@ fun PigCard(
 
                         Spacer(modifier = Modifier.width(8.dp))
 
-                        Text(text = "$bpm", fontSize = 20.sp, fontFamily = FontFamily(Font(R.font.roboto_medium)))
+                        Text(text = bpm, fontSize = 20.sp, fontFamily = FontFamily(Font(R.font.roboto_medium)))
                     }
 
                     Row (
@@ -95,7 +97,7 @@ fun PigCard(
                             modifier = Modifier.size(40.dp)
                         )
 
-                        Text(text = "$bodyTemp°C", fontSize = 20.sp, fontFamily = FontFamily(Font(R.font.roboto_medium)))
+                        Text(text = "$formattedBodyTemp°C", fontSize = 20.sp, fontFamily = FontFamily(Font(R.font.roboto_medium)))
                     }
                 }
             }

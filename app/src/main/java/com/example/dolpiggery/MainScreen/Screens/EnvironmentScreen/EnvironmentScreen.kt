@@ -72,7 +72,7 @@ fun EnvironmentScreen() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .height(350.dp)
+                .height(120.dp)
                 .fillMaxWidth()
         ) {
             if (viewModelMeasurement.temp.value.isNotEmpty()) {
@@ -93,21 +93,21 @@ fun EnvironmentScreen() {
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(0.3f)
+//                    .weight(0.3f)
             ) {
                 TempCard(value = tempValue)
                 HumidityCard(value = humidityValue)
             }
 
-            Row(
-                horizontalArrangement = Arrangement.SpaceAround,
-                verticalAlignment = Alignment.Top,
-                modifier = Modifier
-                    .fillMaxWidth()
-
-            ) {
-                WaterConsumpCard(daily = waterDailyValue, monthly = waterMonthlyValue)
-            }
+//            Row(
+//                horizontalArrangement = Arrangement.SpaceAround,
+//                verticalAlignment = Alignment.Top,
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//
+//            ) {
+//                WaterConsumpCard(daily = waterDailyValue, monthly = waterMonthlyValue)
+//            }
 
         }
     }

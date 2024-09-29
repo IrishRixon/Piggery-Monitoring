@@ -32,6 +32,7 @@ class BarGraphViewModel : ViewModel() {
     }
 
     fun addBarDataList() {
+        Log.i("Bar", "AddbarDatalist")
         var i = 1
         if (barGraphDataList.isNotEmpty()) {
             barDataList.clear()

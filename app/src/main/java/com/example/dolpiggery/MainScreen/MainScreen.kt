@@ -50,7 +50,7 @@ class MainScreen : ComponentActivity() {
                         TopAppBar(
                             title = {
                                 Text(
-                                    text = "Dolpiggery",
+                                    text = "Swine Shine",
                                     fontFamily = FontFamily(Font(R.font.roboto_medium)),
                                 )
                             },
