@@ -17,3 +17,9 @@ object Settings
 data class Detail (
     val cubicleID: Int
 )
+
+@Serializable
+object Scheduling
+
+@Serializable
+object ManageAccounts

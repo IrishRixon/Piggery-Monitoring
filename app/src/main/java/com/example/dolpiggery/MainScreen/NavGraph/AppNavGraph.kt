@@ -17,10 +17,14 @@ import androidx.navigation.toRoute
 import com.example.dolpiggery.MainScreen.NavRoutes.Cubicle
 import com.example.dolpiggery.MainScreen.NavRoutes.Detail
 import com.example.dolpiggery.MainScreen.NavRoutes.Environment
+import com.example.dolpiggery.MainScreen.NavRoutes.ManageAccounts
+import com.example.dolpiggery.MainScreen.NavRoutes.Scheduling
 import com.example.dolpiggery.MainScreen.NavRoutes.Settings
 import com.example.dolpiggery.MainScreen.Screens.CubiclesScreen.CubicleScreen
 import com.example.dolpiggery.MainScreen.Screens.CubiclesScreen.DetailsScreen.DetailScreen
 import com.example.dolpiggery.MainScreen.Screens.EnvironmentScreen.EnvironmentScreen
+import com.example.dolpiggery.MainScreen.Screens.SettingsScreen.ManageAccountsScreen.ManageAccountsScreen
+import com.example.dolpiggery.MainScreen.Screens.SettingsScreen.SchedulingScreen.SchedulingScreen
 import com.example.dolpiggery.MainScreen.Screens.SettingsScreen.SettingsScreen
 
 @Composable
@@ -46,7 +50,13 @@ fun AppNavGraph(navController: NavHostController) {
             EnvironmentScreen()
         }
         composable<Settings> {
-            SettingsScreen()
+            SettingsScreen(navController)
+        }
+        composable<Scheduling> {
+            SchedulingScreen()
+        }
+        composable<ManageAccounts> {
+            ManageAccountsScreen()
         }
     }
 }
