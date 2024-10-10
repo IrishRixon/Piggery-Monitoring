@@ -31,11 +31,8 @@ import com.example.dolpiggery.MainScreen.Screens.SettingsScreen.SettingsScreen
 fun AppNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = Cubicle,
-//        enterTransition = { EnterTransition.None },
-//        exitTransition = { ExitTransition.None },
-        contentAlignment = Alignment.Center,
-//        modifier = Modifier.fillMaxSize()
+        startDestination = Cubicle, // Cubicle Screen is the start of the destination
+        contentAlignment = Alignment.Center
     ) {
         composable<Cubicle> {
             CubicleScreen(navController)
@@ -53,7 +50,7 @@ fun AppNavGraph(navController: NavHostController) {
             SettingsScreen(navController)
         }
         composable<Scheduling> {
-            SchedulingScreen()
+            SchedulingScreen(navController)
         }
         composable<ManageAccounts> {
             ManageAccountsScreen()

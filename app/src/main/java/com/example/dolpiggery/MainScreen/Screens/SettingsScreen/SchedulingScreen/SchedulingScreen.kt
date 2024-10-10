@@ -1,37 +1,61 @@
 package com.example.dolpiggery.MainScreen.Screens.SettingsScreen.SchedulingScreen
 
-import androidx.compose.foundation.layout.Box
+import android.util.Log
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.OutlinedTextField
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.example.dolpiggery.MainActivity.UIComponents.DefaultOutlineTextField
-import com.example.dolpiggery.MainScreen.UIComponents.Scheduling.SchedDefaultOutLinedTextField
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import com.example.dolpiggery.MainScreen.NavRoutes.Scheduling
+import com.example.dolpiggery.MainScreen.NavigationCurrentPosition.NavigationCurrentPosition
 import com.example.dolpiggery.MainScreen.UIComponents.Scheduling.SchedTextButton
+import com.example.dolpiggery.MainScreen.ViewModel.Scheduling.SchedulingViewModel
+import com.example.dolpiggery.ui.theme.PacificCyan5
 
 @Composable
-fun SchedulingScreen() {
+fun SchedulingScreen(navController: NavController) {
+    NavigationCurrentPosition.setCurrentNavDestination("$Scheduling")
 
-    val scroll = rememberScrollState()
+    val viewModel: SchedulingViewModel = viewModel()
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(scroll)
-    ) {
-//        SchedTextButton()
+    LaunchedEffect(key1 = Unit) {
+        viewModel.addScheduleList()
+    }
+
+    if (viewModel.scheduleList.isEmpty()) {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            CircularProgressIndicator(color = PacificCyan5)
+        }
+    }
+    else {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            items(viewModel.scheduleList) {
+                SchedTextButton(
+                    schedID = it.schedID,
+                    targets = it.targets,
+                    days = it.days,
+                    hour = it.hour,
+                    minute = it.minute,
+                    amOrPm = it.amOrPm,
+                    isActive = it.isActive
+                )
+            }
+        }
     }
 }

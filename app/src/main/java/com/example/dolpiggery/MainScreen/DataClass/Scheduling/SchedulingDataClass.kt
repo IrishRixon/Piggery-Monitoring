@@ -1,7 +1,8 @@
 package com.example.dolpiggery.MainScreen.DataClass.Scheduling
 
-data class  SchedulingDataClass(
-    val cubicleID: Int,
+data class SchedulingDataClass(
+    val schedID: String,
+    val targets: List<String>,
     val hour: Int,
     val minute: Int,
     val amOrPm: String,

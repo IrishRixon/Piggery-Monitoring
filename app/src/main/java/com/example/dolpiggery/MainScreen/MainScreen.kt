@@ -1,7 +1,6 @@
 package com.example.dolpiggery.MainScreen
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -11,29 +10,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.navigation.compose.rememberNavController
 import com.example.dolpiggery.MainScreen.NavGraph.AppNavGraph
 import com.example.dolpiggery.MainScreen.UIComponents.NavigationBar.CreateNavBar
-import com.example.dolpiggery.R
+import com.example.dolpiggery.MainScreen.UIComponents.NavigationBar.CreateTopBar
 import com.example.dolpiggery.ui.theme.DolPiggeryTheme
-import com.example.dolpiggery.ui.theme.PacificCyan5
 import com.example.dolpiggery.ui.theme.Snow60
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 
 class MainScreen : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -43,21 +27,15 @@ class MainScreen : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             DolPiggeryTheme {
+                //Initialize the navController that will be used to control the navigation
                 val navController = rememberNavController()
 
+
+                // Scaffold is used to create top bar and bottom bar
                 Scaffold(
                     topBar = {
-                        TopAppBar(
-                            title = {
-                                Text(
-                                    text = "Swine Shine",
-                                    fontFamily = FontFamily(Font(R.font.roboto_medium)),
-                                )
-                            },
-                            colors = TopAppBarDefaults.topAppBarColors(
-                                containerColor = PacificCyan5
-                            ),
-                        )
+                        // TopAppBar composable is used to create a simple top app bar
+                        CreateTopBar()
                     },
                     containerColor = Snow60,
                     modifier = Modifier
@@ -66,6 +44,10 @@ class MainScreen : ComponentActivity() {
                         CreateNavBar(navController = navController)
                     }
                 ) { innerPadding ->
+                    /* This is the content of the Scaffold,
+                    The innerPadding is a must to pass as an argument to padding.
+                    This is where the content of the screens will be placed */
+
                     Column(
                         horizontalAlignment = Alignment.Start,
                         verticalArrangement = Arrangement.Top,
@@ -73,6 +55,7 @@ class MainScreen : ComponentActivity() {
                             .fillMaxSize()
                             .padding(innerPadding)
                     ) {
+                        //Used to control the navigation of screens
                         AppNavGraph(navController = navController)
                     }
                 }

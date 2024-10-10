@@ -15,7 +15,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             DolPiggeryTheme {
+                //Initialize the navController that will be used to control the navigation
                 val navController = rememberNavController()
+
+                //Invoked the AppNavGraph composable and passed the navController as an argument
                 AppNavGraph(navController = navController)
             }
         }

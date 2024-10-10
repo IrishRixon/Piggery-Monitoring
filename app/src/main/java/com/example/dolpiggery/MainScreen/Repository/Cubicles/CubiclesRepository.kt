@@ -11,10 +11,14 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class CubiclesRepository {
+    //get the reference of the root path of the database
     val databaseRef = FirebaseDatabase.getInstance().getReference()
 
+    /* function to getCubicles list that has the parameter of lambda
+     and takes the list of CubiclesDataClass */
     fun getCubiclesList(onDataChanged: (List<CubicleDataClass>) -> Unit) {
         databaseRef.addValueEventListener(object : ValueEventListener {
+            //Invoke everytime the DataChange on database
             override fun onDataChange(snapshot: DataSnapshot) {
                 var cubicleID = 0
                 var valveSwitch = false
@@ -22,6 +26,7 @@ class CubiclesRepository {
 
                 val cubicleList = mutableListOf<CubicleDataClass>()
                 if (snapshot.exists()) {
+                    // Iterate each children of the
                     for (cubicle in snapshot.children) {
                         if(cubicle.key?.contains("Cubicle", true) == true){
                             for (child in cubicle.children) {

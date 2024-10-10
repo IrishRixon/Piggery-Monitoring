@@ -23,14 +23,14 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.dolpiggery.MainScreen.NavRoutes.ManageAccounts
 import com.example.dolpiggery.MainScreen.NavRoutes.Scheduling
+import com.example.dolpiggery.MainScreen.NavRoutes.Settings
+import com.example.dolpiggery.MainScreen.NavigationCurrentPosition.NavigationCurrentPosition
 import com.example.dolpiggery.MainScreen.UIComponents.Scheduling.SettingsScreenCustomTextButton
 import com.example.dolpiggery.ui.theme.Snow60
 
 @Composable
 fun SettingsScreen(navController: NavHostController) {
-
-    val optList = listOf("Scheduling", "Manage Accounts")
-
+NavigationCurrentPosition.setCurrentNavDestination("$Settings")
     Column(
         modifier = Modifier
             .fillMaxSize()

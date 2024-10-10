@@ -17,8 +17,9 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun LoginButton(onClicked: () -> Unit) {
+    // This is the UI of Login Button
     Button(
-        onClick = { onClicked() },
+        onClick = { onClicked() }, // This invoked the lambda that passed as an argument
         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF146C94),
             contentColor = Color(0xFFF6F1F1)),
         contentPadding = PaddingValues(15.dp),

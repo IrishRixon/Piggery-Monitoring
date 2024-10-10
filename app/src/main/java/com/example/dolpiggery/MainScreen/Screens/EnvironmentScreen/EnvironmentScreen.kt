@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -18,16 +19,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.dolpiggery.MainScreen.NavRoutes.Environment
+import com.example.dolpiggery.MainScreen.NavigationCurrentPosition.NavigationCurrentPosition
 import com.example.dolpiggery.MainScreen.UIComponents.Graph.BarGraph
 import com.example.dolpiggery.MainScreen.UIComponents.Measurement.Cards.HumidityCard
 import com.example.dolpiggery.MainScreen.UIComponents.Measurement.Cards.TempCard
 import com.example.dolpiggery.MainScreen.UIComponents.Measurement.Cards.WaterConsumpCard
 import com.example.dolpiggery.MainScreen.ViewModel.Environment.BarGraph.BarGraphViewModel
 import com.example.dolpiggery.MainScreen.ViewModel.Environment.Measurement.MeasurementViewModel
+import com.example.dolpiggery.ui.theme.PacificCyan5
 import com.example.dolpiggery.ui.theme.Snow60
 
 @Composable
 fun EnvironmentScreen() {
+    NavigationCurrentPosition.setCurrentNavDestination("$Environment")
     val viewModel: BarGraphViewModel = viewModel()
     val viewModelMeasurement: MeasurementViewModel = viewModel()
 
@@ -49,7 +54,7 @@ fun EnvironmentScreen() {
         ) {
             Log.i("Bar", "Hello")
             if (viewModel.barGraphDataList.isEmpty()) {
-                Text(text = "Loading ... ", fontSize = 20.sp)
+                CircularProgressIndicator(color = PacificCyan5)
             } else {
                 viewModel.addBarDataList()
                 BarGraph(
@@ -72,7 +77,7 @@ fun EnvironmentScreen() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .height(120.dp)
+                .height(330.dp)
                 .fillMaxWidth()
         ) {
             if (viewModelMeasurement.temp.value.isNotEmpty()) {
@@ -93,21 +98,21 @@ fun EnvironmentScreen() {
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .fillMaxWidth()
-//                    .weight(0.3f)
+                    .weight(0.3f)
             ) {
                 TempCard(value = tempValue)
                 HumidityCard(value = humidityValue)
             }
 
-//            Row(
-//                horizontalArrangement = Arrangement.SpaceAround,
-//                verticalAlignment = Alignment.Top,
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//
-//            ) {
-//                WaterConsumpCard(daily = waterDailyValue, monthly = waterMonthlyValue)
-//            }
+            Row(
+                horizontalArrangement = Arrangement.SpaceAround,
+                verticalAlignment = Alignment.Top,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(0.7f)
+            ) {
+                WaterConsumpCard(daily = waterDailyValue, monthly = waterMonthlyValue)
+            }
 
         }
     }

@@ -7,24 +7,26 @@ import com.example.dolpiggery.MainScreen.MainScreen
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginRepository {
-    val auth = FirebaseAuth.getInstance()
+    val auth = FirebaseAuth.getInstance() // Created Instance of the FirebaseAuth
 
-    val adminUID = "rq0Ss54BuBgCHN6Rj5j80TE3ZYG3"
-    val currentUserIUD = auth.currentUser?.uid
+//    val adminUID = "rP1Xjk74I9hARbytAqo6IQXjt9q2"
+//    val currentUserIUD = auth.currentUser?.uid
 
     fun loginUserRepo(email: String, password: String, context: MainActivity) {
+        // Checks if the credentials are filled or not
         if (email.isEmpty() && password.isEmpty()) {
+            //If the credentials are empty this block will execute
             Toast.makeText(context, "Please enter Inputs", Toast.LENGTH_SHORT).show()
         } else {
+            // else invoked the signInWithEmailAndPassword function
             auth.signInWithEmailAndPassword(email, password).addOnSuccessListener {
-                if (currentUserIUD.equals(adminUID)) {
-                    Toast.makeText(context, "Admin Login Successful", Toast.LENGTH_SHORT).show()
-                }
+                /* If the result is successful this block will execute */
                 Intent(context, MainScreen::class.java).also {
                     context.startActivity(it)
                     context.finish()
                 }
             }.addOnFailureListener {
+                // If the result is failed are incorrect this block will execute
                 Toast.makeText(context, "${it.message}", Toast.LENGTH_SHORT).show()
             }
         }

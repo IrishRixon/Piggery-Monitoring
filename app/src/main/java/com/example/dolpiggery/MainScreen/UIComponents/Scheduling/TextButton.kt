@@ -1,8 +1,6 @@
 package com.example.dolpiggery.MainScreen.UIComponents.Scheduling
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -11,12 +9,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Switch
-import androidx.compose.material3.SwitchColors
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -25,23 +21,28 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.example.dolpiggery.MainScreen.NavRoutes.Scheduling
+import com.example.dolpiggery.MainScreen.NavigationCurrentPosition.NavigationCurrentPosition
+import com.example.dolpiggery.MainScreen.ViewModel.Scheduling.SchedulingViewModel
 import com.example.dolpiggery.ui.theme.Cerulean5
-import com.example.dolpiggery.ui.theme.PacificCyan5
 import com.example.dolpiggery.ui.theme.Snow60
 
 @Composable
 fun SchedTextButton(
-    cubicleID: Int,
+    schedID: String,
+    targets: List<String>,
     hour: Int,
     minute: Int,
     amOrPm: String,
     days: List<String>,
     isActive: Boolean
 ) {
+
+    val viewModel: SchedulingViewModel = viewModel()
 
     TextButton(
         onClick = { /*TODO*/ },
@@ -64,7 +65,7 @@ fun SchedTextButton(
             verticalArrangement = Arrangement.SpaceEvenly,
         ) {
             Row {
-                Text(text = "Cubicle $cubicleID")
+                Text(text = "Cubicle $targets")
             }
 
             Row {
@@ -98,8 +99,8 @@ fun SchedTextButton(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Switch(
-                checked = true,
-                onCheckedChange = {},
+                checked = isActive,
+                onCheckedChange = { viewModel.toggleSwitch(it, schedID) },
                 modifier = Modifier.size(20.dp),
                 colors = SwitchDefaults.colors(
                     checkedTrackColor = Cerulean5,

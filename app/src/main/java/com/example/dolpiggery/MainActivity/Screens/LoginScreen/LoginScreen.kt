@@ -29,10 +29,15 @@ import com.example.dolpiggery.ui.theme.PacificCyan5
 import com.example.dolpiggery.ui.theme.Snow60
 
 @Composable
-@Preview
 fun LoginScreen() {
+
+    /* The TextFieldViewModel class is a subclass of ViewModel,
+    so the new instance needs to be initialized with viewModel(). This is done because we need the app
+    to remember the state of the mutableStates in TextFieldViewModel across configuration
+    such as screen rotations*/
     val viewModel: TextFieldViewModel = viewModel()
 
+    // Below is the UI of Login Screen
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -48,7 +53,7 @@ fun LoginScreen() {
             Column (
                 horizontalAlignment = Alignment.CenterHorizontally
             ){
-                PigCageImage(size = 80.dp)
+                PigCageImage(size = 100.dp)
 
                 Spacer(modifier = Modifier.height(25.dp))
 
@@ -61,11 +66,14 @@ fun LoginScreen() {
 
                 Spacer(modifier = Modifier.height(20.dp))
 
+                // These are the composables from UIComponents package
                 EmailOutlineTextField()
                 Spacer(modifier = Modifier.height(5.dp))
                 PasswordOutlineTextField()
 
                 Spacer(modifier = Modifier.height(20.dp))
+                /* Invoked the LoginButton composable with lambda as an argument.
+                That lambda invoke the loginUser function in TextFieldViewModel */
                 LoginButton { viewModel.loginUser(MainActivityContext.getContext()) }
             }
         }

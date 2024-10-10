@@ -12,6 +12,7 @@ import com.example.dolpiggery.R
 
 @Composable
 fun PigCageImage(size: Dp) {
+    // This is a composable for Logo
     Image(
         painter = painterResource(id = R.drawable.pig_cage),
         contentDescription = null,

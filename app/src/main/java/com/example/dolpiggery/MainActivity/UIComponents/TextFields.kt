@@ -33,6 +33,7 @@ import com.example.dolpiggery.ui.theme.PacificCyan5
 import org.w3c.dom.Text
 import java.lang.reflect.Modifier
 
+//Custom made reusable composables
 @Composable
 fun DefaultOutlineTextField(
     value: String,
