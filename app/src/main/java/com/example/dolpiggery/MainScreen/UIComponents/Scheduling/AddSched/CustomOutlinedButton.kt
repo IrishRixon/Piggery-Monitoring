@@ -1,4 +1,4 @@
-package com.example.dolpiggery.MainScreen.UIComponents.Scheduling.AddSchedScreen
+package com.example.dolpiggery.MainScreen.UIComponents.Scheduling.AddSched
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -8,7 +8,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.dolpiggery.ui.theme.PacificCyan5
 
 @Composable
@@ -20,6 +19,6 @@ fun AddSchedOutlinedButton(isUp: Boolean, onClicked: () -> Unit) {
         shape = RoundedCornerShape(10),
         colors = ButtonDefaults.outlinedButtonColors(contentColor = PacificCyan5)
     ) {
-        Icon(imageVector = Icons.Filled.KeyboardArrowUp, contentDescription = null)
+        Icon(imageVector = icn, contentDescription = null)
     }
 }
