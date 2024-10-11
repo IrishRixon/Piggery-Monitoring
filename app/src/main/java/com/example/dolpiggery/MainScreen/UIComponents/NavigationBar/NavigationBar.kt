@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.dolpiggery.MainScreen.NavigationCurrentPosition.NavigationCurrentPosition
 import com.example.dolpiggery.MainScreen.DataClass.NavBarItem.NavBarItem
+import com.example.dolpiggery.MainScreen.NavRoutes.AddSched
 import com.example.dolpiggery.MainScreen.NavRoutes.Cubicle
 import com.example.dolpiggery.MainScreen.NavRoutes.Environment
 import com.example.dolpiggery.MainScreen.NavRoutes.Scheduling
@@ -126,7 +127,7 @@ fun CreateNavBar(navController: NavHostController) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CreateTopBar() {
+fun CreateTopBar(navController: NavHostController) {
     val currentNavLoc = NavigationCurrentPosition.currentNavPosition.value
 
     TopAppBar(
@@ -142,7 +143,7 @@ fun CreateTopBar() {
         actions = {
             if (currentNavLoc == Scheduling.toString()) {
                 IconButton(
-                    onClick = {},
+                    onClick = { navController.navigate(AddSched())},
                     colors = IconButtonDefaults.iconButtonColors(contentColor = Snow60)
                 ) {
                     Icon(imageVector = Icons.Outlined.Add, contentDescription = null)

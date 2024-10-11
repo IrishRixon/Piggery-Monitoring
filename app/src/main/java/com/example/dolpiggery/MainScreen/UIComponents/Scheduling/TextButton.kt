@@ -25,8 +25,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.example.dolpiggery.MainScreen.NavRoutes.AddSched
 import com.example.dolpiggery.MainScreen.NavRoutes.Scheduling
 import com.example.dolpiggery.MainScreen.NavigationCurrentPosition.NavigationCurrentPosition
+import com.example.dolpiggery.MainScreen.ViewModel.Scheduling.AddSchedViewModel.AddSchedViewModel
 import com.example.dolpiggery.MainScreen.ViewModel.Scheduling.SchedulingViewModel
 import com.example.dolpiggery.ui.theme.Cerulean5
 import com.example.dolpiggery.ui.theme.Snow60
@@ -39,13 +41,14 @@ fun SchedTextButton(
     minute: Int,
     amOrPm: String,
     days: List<String>,
-    isActive: Boolean
+    isActive: Boolean,
+    navController: NavHostController,
 ) {
 
     val viewModel: SchedulingViewModel = viewModel()
 
     TextButton(
-        onClick = { /*TODO*/ },
+        onClick = { navController.navigate(AddSched(hour, minute, amOrPm, schedID)) },
         modifier = Modifier
             .fillMaxWidth()
             .height(120.dp),
@@ -69,8 +72,10 @@ fun SchedTextButton(
             }
 
             Row {
+                val formattedHour = if(hour < 10) "0$hour" else "$hour"
+                val formattedMinute = if(minute < 10) "0$minute" else "$minute"
                 Text(
-                    text = "$hour : $minute $amOrPm",
+                    text = "$formattedHour : $formattedMinute $amOrPm",
                     fontSize = 30.sp
                 )
             }

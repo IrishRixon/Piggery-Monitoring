@@ -35,7 +35,7 @@ class MainScreen : ComponentActivity() {
                 Scaffold(
                     topBar = {
                         // TopAppBar composable is used to create a simple top app bar
-                        CreateTopBar()
+                        CreateTopBar(navController)
                     },
                     containerColor = Snow60,
                     modifier = Modifier

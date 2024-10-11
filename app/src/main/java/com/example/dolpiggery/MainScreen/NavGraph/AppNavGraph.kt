@@ -1,19 +1,12 @@
 package com.example.dolpiggery.MainScreen.NavGraph
 
-import android.util.Log
-import androidx.compose.animation.EnterTransition
-import androidx.compose.animation.ExitTransition
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
+import com.example.dolpiggery.MainScreen.NavRoutes.AddSched
 import com.example.dolpiggery.MainScreen.NavRoutes.Cubicle
 import com.example.dolpiggery.MainScreen.NavRoutes.Detail
 import com.example.dolpiggery.MainScreen.NavRoutes.Environment
@@ -24,6 +17,7 @@ import com.example.dolpiggery.MainScreen.Screens.CubiclesScreen.CubicleScreen
 import com.example.dolpiggery.MainScreen.Screens.CubiclesScreen.DetailsScreen.DetailScreen
 import com.example.dolpiggery.MainScreen.Screens.EnvironmentScreen.EnvironmentScreen
 import com.example.dolpiggery.MainScreen.Screens.SettingsScreen.ManageAccountsScreen.ManageAccountsScreen
+import com.example.dolpiggery.MainScreen.Screens.SettingsScreen.SchedulingScreen.AddSchedScreen.AddSchedScreen
 import com.example.dolpiggery.MainScreen.Screens.SettingsScreen.SchedulingScreen.SchedulingScreen
 import com.example.dolpiggery.MainScreen.Screens.SettingsScreen.SettingsScreen
 
@@ -51,6 +45,15 @@ fun AppNavGraph(navController: NavHostController) {
         }
         composable<Scheduling> {
             SchedulingScreen(navController)
+        }
+        composable<AddSched> {
+            val args = it.toRoute<AddSched>()
+            val hour = args.hour
+            val minute = args.minute
+            val amOrPm = args.amOrPm
+            val schedID = args.schedID
+
+            AddSchedScreen(hour, minute, amOrPm, schedID)
         }
         composable<ManageAccounts> {
             ManageAccountsScreen()

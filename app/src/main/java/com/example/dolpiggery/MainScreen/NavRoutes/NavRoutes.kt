@@ -22,4 +22,12 @@ data class Detail (
 object Scheduling
 
 @Serializable
+data class AddSched (
+    val hour: Int = 7,
+    val minute: Int = 0,
+    val amOrPm: String = "AM",
+    val schedID: String? = null
+)
+
+@Serializable
 object ManageAccounts

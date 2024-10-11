@@ -1,6 +1,5 @@
 package com.example.dolpiggery.MainScreen.Screens.SettingsScreen.SchedulingScreen
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,15 +12,16 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.dolpiggery.MainScreen.NavRoutes.Scheduling
 import com.example.dolpiggery.MainScreen.NavigationCurrentPosition.NavigationCurrentPosition
 import com.example.dolpiggery.MainScreen.UIComponents.Scheduling.SchedTextButton
+import com.example.dolpiggery.MainScreen.ViewModel.Scheduling.AddSchedViewModel.AddSchedViewModel
 import com.example.dolpiggery.MainScreen.ViewModel.Scheduling.SchedulingViewModel
 import com.example.dolpiggery.ui.theme.PacificCyan5
 
 @Composable
-fun SchedulingScreen(navController: NavController) {
+fun SchedulingScreen(navController: NavHostController) {
     NavigationCurrentPosition.setCurrentNavDestination("$Scheduling")
 
     val viewModel: SchedulingViewModel = viewModel()
@@ -53,7 +53,8 @@ fun SchedulingScreen(navController: NavController) {
                     hour = it.hour,
                     minute = it.minute,
                     amOrPm = it.amOrPm,
-                    isActive = it.isActive
+                    isActive = it.isActive,
+                    navController = navController,
                 )
             }
         }
