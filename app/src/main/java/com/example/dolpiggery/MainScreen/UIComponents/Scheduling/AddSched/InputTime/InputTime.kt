@@ -18,28 +18,30 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.dolpiggery.MainScreen.UIComponents.Scheduling.AddSched.AddSchedOutlinedButton
+import com.example.dolpiggery.ui.theme.Snow60
 
 
 @Composable
 fun InputTimeTemplate(
     timeTypeValue: String,
     upperLimit: Int,
+    lowerLimit: Int,
     viewModelSetTime: (Int) -> Unit,
-    timeZeroPadding: (String) -> String
+    zeroPadding: (String) -> String
 ) {
     var timeState by remember { mutableStateOf(timeTypeValue) }
 
     AddSchedOutlinedButton(isUp = true) {
-        val count = if(timeState.toInt() >= upperLimit) 1 else timeState.toInt() + 1
+        val count = if(timeState.toInt() >= upperLimit) lowerLimit else timeState.toInt() + 1
         timeState = count.toString()
         viewModelSetTime(timeState.toInt())
     }
 
     OutlinedTextField(
-        value = timeZeroPadding(timeState),
+        value = zeroPadding(timeState),
         onValueChange =
         {
-            val timeValue = if (it.isNotEmpty()) it.toInt() else 1
+            val timeValue = if (it.isNotEmpty()) it.toInt() else lowerLimit
             timeState = if(timeValue > upperLimit) (timeValue % 10).toString() else timeValue.toString()
         },
         colors = OutlinedTextFieldDefaults.colors(),
@@ -54,15 +56,46 @@ fun InputTimeTemplate(
     )
 
     AddSchedOutlinedButton(isUp = false) {
-        val count = if(timeState.toInt() <= 1) upperLimit else timeState.toInt() - 1
+        val count = if(timeState.toInt() <= lowerLimit) upperLimit else timeState.toInt() - 1
         timeState = count.toString()
         viewModelSetTime(timeState.toInt())
     }
 }
 
-fun timeZeroPadding(value: String): String {
+@Composable
+fun AmOrPmUi(isUp: Boolean, valState:String, viewModelSetAmOrPm: (String) -> Unit) {
+    var amOrPmState by remember {
+        mutableStateOf(valState)
+    }
+
+    AddSchedOutlinedButton(isUp = isUp) {
+        amOrPmState = if(amOrPmState == "AM") "PM" else "AM"
+        viewModelSetAmOrPm(amOrPmState)
+    }
+
+    OutlinedTextField(
+        value = amOrPmState,
+        onValueChange = { },
+        colors = OutlinedTextFieldDefaults.colors(unfocusedBorderColor = Snow60),
+        modifier = Modifier.width(90.dp),
+        singleLine = true,
+        readOnly = true,
+        textStyle = TextStyle(
+            fontSize = 35.sp,
+            color = Color.Black,
+            textAlign = TextAlign.Center
+        )
+    )
+
+    AddSchedOutlinedButton(isUp = false) {
+        amOrPmState = if(amOrPmState == "AM") "PM" else "AM"
+        viewModelSetAmOrPm(amOrPmState)
+    }
+}
+
+fun timeZeroPadding(value: String, timeType: String): String {
     Log.i("Hi", value)
-    return if(value.toInt() == 0) {
+    return if(value.toInt() == 0 && timeType == "Hour") {
         "01"
     }
     else if (value.toInt() < 10) {

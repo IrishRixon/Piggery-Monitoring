@@ -1,17 +1,22 @@
 package com.example.dolpiggery.MainScreen.Screens.SettingsScreen.SchedulingScreen.AddSchedScreen
 
+import android.widget.Space
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.dolpiggery.MainScreen.NavigationCurrentPosition.NavigationCurrentPosition
+import com.example.dolpiggery.MainScreen.UIComponents.Scheduling.AddSched.InputTime.AmOrPmUi
 import com.example.dolpiggery.MainScreen.UIComponents.Scheduling.AddSched.InputTime.InputTimeTemplate
 import com.example.dolpiggery.MainScreen.UIComponents.Scheduling.AddSched.InputTime.timeZeroPadding
 import com.example.dolpiggery.MainScreen.ViewModel.Scheduling.AddSchedViewModel.AddSchedViewModel
@@ -51,33 +56,48 @@ fun AddSchedScreen(
             modifier = Modifier.weight(0.9f)
         ) {
             Row (
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxWidth()
             ){
                 Column {
                     InputTimeTemplate(
                         timeTypeValue = viewModel.hour.value,
                         upperLimit = 12,
+                        lowerLimit = 1,
                         viewModelSetTime = {
                             viewModel.setHour(it)
                         },
-                        timeZeroPadding = {
-                            timeZeroPadding(it)
+                        zeroPadding = {
+                            timeZeroPadding(it, "Hour")
                         }
                     )
                 }
 
                 Text(text = ":", fontSize = 35.sp)
+
                 Column {
                     InputTimeTemplate(
                         timeTypeValue = viewModel.minute.value,
                         upperLimit = 59,
+                        lowerLimit = 0,
                         viewModelSetTime = {
                             viewModel.setMinute(it)
                         },
-                        timeZeroPadding = {
-                            timeZeroPadding(it)
+                        zeroPadding = {
+                            timeZeroPadding(it, "Minute")
                         }
                     )
+                }
+
+                Spacer(modifier = Modifier.width(20.dp))
+
+                Column (
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ){
+                    AmOrPmUi(isUp = true, valState = viewModel.amOrPm.value) {
+                        viewModel.setAmOrPm(it)
+                    }
                 }
             }
         }
