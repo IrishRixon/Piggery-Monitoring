@@ -24,7 +24,7 @@ class SchedulingRepository {
         databaseRef.child("Schedule").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 var schedID: String
-                var days = mutableListOf<String>()
+                var days = mutableListOf<Int>()
                 var targets = mutableListOf<String>()
                 var amOrPm: String
                 var hour: Int
@@ -47,7 +47,7 @@ class SchedulingRepository {
                         }
                         for (day in sched.child("days").children) {
                             Log.i("Hey", "$day")
-                            days.add(day.key.toString())
+                            days.add(day.value.toString().toInt())
                         }
 
                         val item = SchedulingDataClass(

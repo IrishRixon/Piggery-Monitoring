@@ -6,6 +6,6 @@ data class SchedulingDataClass(
     val hour: Int,
     val minute: Int,
     val amOrPm: String,
-    val days: List<String>,
+    val days: List<Int>,
     val isActive: Boolean
 )

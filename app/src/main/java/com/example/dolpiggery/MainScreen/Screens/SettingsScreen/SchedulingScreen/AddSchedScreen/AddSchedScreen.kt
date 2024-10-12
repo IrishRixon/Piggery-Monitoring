@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,6 +21,7 @@ import com.example.dolpiggery.MainScreen.NavigationCurrentPosition.NavigationCur
 import com.example.dolpiggery.MainScreen.UIComponents.Scheduling.AddSched.InputTime.AmOrPmUi
 import com.example.dolpiggery.MainScreen.UIComponents.Scheduling.AddSched.InputTime.InputTimeTemplate
 import com.example.dolpiggery.MainScreen.UIComponents.Scheduling.AddSched.InputTime.timeZeroPadding
+import com.example.dolpiggery.MainScreen.UIComponents.Scheduling.AddSched.Repeat.DayRepeatButton
 import com.example.dolpiggery.MainScreen.ViewModel.Scheduling.AddSchedViewModel.AddSchedViewModel
 
 @Composable
@@ -97,6 +100,25 @@ fun AddSchedScreen(
                 ){
                     AmOrPmUi(isUp = true, valState = viewModel.amOrPm.value) {
                         viewModel.setAmOrPm(it)
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Column {
+                Row (
+                    modifier = Modifier.padding(start = 10.dp)
+                ){
+                    Text(text = "Repeat", fontSize = 15.sp)
+                }
+                Row (
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceEvenly,
+                    modifier = Modifier.fillMaxWidth()
+                ){
+                    for (i in 0..6) {
+                        DayRepeatButton(viewModel = viewModel, day = i)
                     }
                 }
             }

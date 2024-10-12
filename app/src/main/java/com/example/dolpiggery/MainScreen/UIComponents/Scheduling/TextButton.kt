@@ -40,7 +40,7 @@ fun SchedTextButton(
     hour: Int,
     minute: Int,
     amOrPm: String,
-    days: List<String>,
+    days: List<Int>,
     isActive: Boolean,
     navController: NavHostController,
 ) {
@@ -81,11 +81,13 @@ fun SchedTextButton(
             }
 
             Row {
-                var daysString = ""
+                val daysSorted = days.sorted()
                 val daysSize = days.size - 1
-                for(i in days) {
-                    daysString += i
-                    if(daysSize != 0) {
+
+                var daysString = ""
+                daysSorted.forEachIndexed{ index, item ->
+                    daysString += dayIntToDayString(item)
+                    if(index != daysSize) {
                         daysString += ", "
                     }
                 }
@@ -153,4 +155,17 @@ fun SettingsScreenCustomTextButton(
         }
     }
     HorizontalDivider(color = Color.Gray)
+}
+
+fun dayIntToDayString(dayInt: Int): String {
+    return when(dayInt) {
+        0 -> "Sun"
+        1 -> "Mon"
+        2 -> "Tue"
+        3 -> "Wed"
+        4 -> "Thu"
+        5 -> "Fri"
+        6 -> "Sat"
+        else -> "Error"
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.dolpiggery.MainScreen.ViewModel.Scheduling.AddSchedViewModel
 
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 
@@ -7,6 +8,8 @@ class AddSchedViewModel : ViewModel() {
     var hour = mutableStateOf("")
     var minute = mutableStateOf("")
     var amOrPm = mutableStateOf("")
+
+    val daysRepeatList = mutableStateListOf<Int>()
 
     fun setHour(hour: Int) {
         this.hour.value = "$hour"
@@ -20,15 +23,11 @@ class AddSchedViewModel : ViewModel() {
         this.amOrPm.value = amOrPm
     }
 
-    fun getHour(): String {
-        return hour.value
+    fun addDayRepeat(day: Int) {
+        daysRepeatList.add(day)
     }
 
-    fun getMinute(): String {
-        return minute.value
-    }
-
-    fun getAmOrPm(): String {
-        return amOrPm.value
+    fun removeDayRepeat(day: Int) {
+        daysRepeatList.remove(day)
     }
 }

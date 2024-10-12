@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,7 +30,7 @@ fun InputTimeTemplate(
     viewModelSetTime: (Int) -> Unit,
     zeroPadding: (String) -> String
 ) {
-    var timeState by remember { mutableStateOf(timeTypeValue) }
+    var timeState by rememberSaveable { mutableStateOf(timeTypeValue) }
 
     AddSchedOutlinedButton(isUp = true) {
         val count = if(timeState.toInt() >= upperLimit) lowerLimit else timeState.toInt() + 1
@@ -64,7 +65,7 @@ fun InputTimeTemplate(
 
 @Composable
 fun AmOrPmUi(isUp: Boolean, valState:String, viewModelSetAmOrPm: (String) -> Unit) {
-    var amOrPmState by remember {
+    var amOrPmState by rememberSaveable {
         mutableStateOf(valState)
     }
 
