@@ -1,6 +1,5 @@
-package com.example.dolpiggery.MainScreen.UIComponents.Scheduling.AddSched.Repeat
+package com.example.dolpiggery.MainScreen.UIComponents.Scheduling.AddSched.Targets
 
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.size
@@ -19,13 +18,11 @@ import com.example.dolpiggery.ui.theme.Platinum
 import com.example.dolpiggery.ui.theme.Snow60
 
 @Composable
-//@Preview(showBackground = true, backgroundColor = Color.WHITE.toLong())
-fun DayRepeatButton(viewModel: AddSchedViewModel, day: Int) {
+fun TargetButton(viewModel: AddSchedViewModel, target: Int) {
+    val isSelected = viewModel.targetsList.contains(target)
 
-    val isSelected = viewModel.daysRepeatList.contains(day)
-    val dayString = dayIntToDayString(day)
     OutlinedButton(
-        onClick = { if(!isSelected) viewModel.addDayRepeat(day) else viewModel.removeDayRepeat(day) },
+        onClick = { if(!isSelected) viewModel.addTarget(target) else viewModel.removeTarget(target) },
         shape = CircleShape,
         modifier = Modifier
             .clip(CircleShape)
@@ -37,21 +34,6 @@ fun DayRepeatButton(viewModel: AddSchedViewModel, day: Int) {
         border = BorderStroke(1.dp, Platinum),
         contentPadding = PaddingValues(0.dp)
     ) {
-        Text(text = dayString, fontSize = 12.sp)
-    }
-
-    Log.i("Hi", "${viewModel.daysRepeatList}")
-}
-
-fun dayIntToDayString(dayInt: Int): String {
-    return when(dayInt) {
-        0 -> "Sun"
-        1 -> "Mon"
-        2 -> "Tue"
-        3 -> "Wed"
-        4 -> "Thu"
-        5 -> "Fri"
-        6 -> "Sat"
-        else -> "Error"
+        Text(text = "$target", fontSize = 12.sp)
     }
 }

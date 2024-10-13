@@ -1,5 +1,7 @@
 package com.example.dolpiggery.MainScreen.UIComponents.Scheduling
 
+import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -9,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.HorizontalDivider
@@ -25,18 +28,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.example.dolpiggery.MainScreen.NavRoutes.AddSched
-import com.example.dolpiggery.MainScreen.NavRoutes.Scheduling
-import com.example.dolpiggery.MainScreen.NavigationCurrentPosition.NavigationCurrentPosition
-import com.example.dolpiggery.MainScreen.ViewModel.Scheduling.AddSchedViewModel.AddSchedViewModel
-import com.example.dolpiggery.MainScreen.ViewModel.Scheduling.SchedulingViewModel
+import com.example.dolpiggery.Navigation.NavRoutes.AddSched
+import com.example.dolpiggery.Settings.ViewModel.SchedulingViewModel
 import com.example.dolpiggery.ui.theme.Cerulean5
 import com.example.dolpiggery.ui.theme.Snow60
 
 @Composable
 fun SchedTextButton(
     schedID: String,
-    targets: List<String>,
+    targets: List<Int>,
     hour: Int,
     minute: Int,
     amOrPm: String,
@@ -46,9 +46,10 @@ fun SchedTextButton(
 ) {
 
     val viewModel: SchedulingViewModel = viewModel()
+    val targetsScroll = rememberScrollState()
 
     TextButton(
-        onClick = { navController.navigate(AddSched(hour, minute, amOrPm, schedID)) },
+        onClick = { navController.navigate(AddSched(hour, minute, amOrPm, schedID, targets, days)) },
         modifier = Modifier
             .fillMaxWidth()
             .height(120.dp),
@@ -67,8 +68,19 @@ fun SchedTextButton(
                 .weight(0.8f),
             verticalArrangement = Arrangement.SpaceEvenly,
         ) {
-            Row {
-                Text(text = "Cubicle $targets")
+            Row(
+                modifier = Modifier.horizontalScroll(targetsScroll)
+            ) {
+                val targetsSorted = targets.sorted()
+                val targetsSize = targets.size - 1
+                var targetsString = ""
+                targetsSorted.forEachIndexed { index, item ->
+                    targetsString += "$item"
+                    if (index != targetsSize) {
+                        targetsString += ", "
+                    }
+                }
+                Text(text = "Pigs $targetsString")
             }
 
             Row {
