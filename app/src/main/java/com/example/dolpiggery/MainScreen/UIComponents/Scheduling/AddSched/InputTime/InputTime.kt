@@ -44,6 +44,8 @@ fun InputTimeTemplate(
         {
             val timeValue = if (it.isNotEmpty()) it.toInt() else lowerLimit
             timeState = if(timeValue > upperLimit) (timeValue % 10).toString() else timeValue.toString()
+            timeState = if(timeState.toInt() == 0 && upperLimit != 59) "01" else timeState
+            viewModelSetTime(timeState.toInt())
         },
         colors = OutlinedTextFieldDefaults.colors(),
         modifier = Modifier.width(72.dp),

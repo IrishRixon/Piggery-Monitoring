@@ -36,11 +36,11 @@ class SchedulingRepository {
                         amOrPm = sched.child("amOrPm").value.toString()
                         hour = sched.child("hour").value.toString().toInt()
                         minute = sched.child("minute").value.toString().toInt()
-                        isActive = sched.child("isActive").value.toString().toBoolean()
+                        isActive = sched.child("active").value.toString().toBoolean()
                         schedID = sched.key.toString()
 
                         Log.i("Hey", "$sched")
-                        for (target in sched.child("Targets").children) {
+                        for (target in sched.child("targets").children) {
                             Log.i("Hey", "$target")
                             targets.add(target.value.toString().toInt())
                         }
@@ -75,7 +75,7 @@ class SchedulingRepository {
     }
 
     fun toggleSwitch(status: Boolean, schedID: String) {
-        databaseRef.child("Schedule").child(schedID).child("isActive").setValue(status)
+        databaseRef.child("Schedule").child(schedID).child("active").setValue(status)
             .addOnSuccessListener {
                 Toast.makeText(
                     MainScreenContext.getContext(),

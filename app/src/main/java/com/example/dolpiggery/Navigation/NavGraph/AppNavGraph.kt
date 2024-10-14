@@ -47,7 +47,7 @@ fun AppNavGraph(navController: NavHostController) {
             val targets = args.targets
             val daysRepeat = args.daysRepeat
 
-            AddSchedScreen(hour, minute, amOrPm, schedID, targets, daysRepeat)
+            AddSchedScreen(hour, minute, amOrPm, schedID, targets, daysRepeat, navController)
         }
         composable<ManageAccounts> {
             ManageAccountsScreen()

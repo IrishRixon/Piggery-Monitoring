@@ -21,6 +21,7 @@ import com.example.dolpiggery.ui.theme.Snow60
 @Composable
 //@Preview(showBackground = true, backgroundColor = Color.WHITE.toLong())
 fun DayRepeatButton(viewModel: AddSchedViewModel, day: Int) {
+//    Log.i("Hi", "DayRepeatButton recomposed")
 
     val isSelected = viewModel.daysRepeatList.contains(day)
     val dayString = dayIntToDayString(day)
@@ -40,7 +41,7 @@ fun DayRepeatButton(viewModel: AddSchedViewModel, day: Int) {
         Text(text = dayString, fontSize = 12.sp)
     }
 
-    Log.i("Hi", "${viewModel.daysRepeatList}")
+    Log.i("Hi", viewModel.hour.value)
 }
 
 fun dayIntToDayString(dayInt: Int): String {
