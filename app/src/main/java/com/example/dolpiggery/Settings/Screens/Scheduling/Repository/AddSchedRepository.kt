@@ -1,7 +1,6 @@
-package com.example.dolpiggery.Settings.Repository
+package com.example.dolpiggery.Settings.Screens.Scheduling.Repository
 
-import android.util.Log
-import com.example.dolpiggery.Settings.DataClass.Scheduling.AddAndEditScheduleDataClass
+import com.example.dolpiggery.Settings.Screens.Scheduling.DataClass.AddAndEditScheduleDataClass
 import com.google.firebase.database.FirebaseDatabase
 
 class AddSchedRepository {

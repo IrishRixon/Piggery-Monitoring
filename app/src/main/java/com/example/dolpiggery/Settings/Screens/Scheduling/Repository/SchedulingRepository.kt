@@ -1,8 +1,8 @@
-package com.example.dolpiggery.Settings.Repository
+package com.example.dolpiggery.Settings.Screens.Scheduling.Repository
 
 import android.util.Log
 import android.widget.Toast
-import com.example.dolpiggery.Settings.DataClass.Scheduling.SchedulingDataClass
+import com.example.dolpiggery.Settings.Screens.Scheduling.DataClass.SchedulingDataClass
 import com.example.dolpiggery.MainScreen.MainScreenContext
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -33,35 +33,37 @@ class SchedulingRepository {
                 var scheduleList = mutableListOf<SchedulingDataClass>()
                 if (snapshot.exists()) {
                     for (sched in snapshot.children) {
-                        amOrPm = sched.child("amOrPm").value.toString()
-                        hour = sched.child("hour").value.toString().toInt()
-                        minute = sched.child("minute").value.toString().toInt()
-                        isActive = sched.child("active").value.toString().toBoolean()
-                        schedID = sched.key.toString()
+                        if (sched.key != "refresh") {
+                            amOrPm = sched.child("amOrPm").value.toString()
+                            hour = sched.child("hour").value.toString().toInt()
+                            minute = sched.child("minute").value.toString().toInt()
+                            isActive = sched.child("active").value.toString().toBoolean()
+                            schedID = sched.key.toString()
 
-                        Log.i("Hey", "$sched")
-                        for (target in sched.child("targets").children) {
-                            Log.i("Hey", "$target")
-                            targets.add(target.value.toString().toInt())
-                        }
-                        for (day in sched.child("days").children) {
-                            Log.i("Hey", "$day")
-                            days.add(day.value.toString().toInt())
-                        }
+                            Log.i("Hey", "$sched")
+                            for (target in sched.child("targets").children) {
+                                Log.i("Hey", "$target")
+                                targets.add(target.value.toString().toInt())
+                            }
+                            for (day in sched.child("days").children) {
+                                Log.i("Hey", "$day")
+                                days.add(day.value.toString().toInt())
+                            }
 
-                        val item = SchedulingDataClass(
-                            targets = targets.toList(),
-                            days = days.toList(),
-                            hour = hour,
-                            minute = minute,
-                            amOrPm = amOrPm,
-                            schedID = schedID,
-                            isActive = isActive
-                        )
-                        scheduleList.add(item)
-                        Log.i("Hey", "datachange schedList: $scheduleList")
-                        targets.clear()
-                        days.clear()
+                            val item = SchedulingDataClass(
+                                targets = targets.toList(),
+                                days = days.toList(),
+                                hour = hour,
+                                minute = minute,
+                                amOrPm = amOrPm,
+                                schedID = schedID,
+                                isActive = isActive
+                            )
+                            scheduleList.add(item)
+                            Log.i("Hey", "datachange schedList: $scheduleList")
+                            targets.clear()
+                            days.clear()
+                        }
                     }
                     onDataChanged(scheduleList)
                 }

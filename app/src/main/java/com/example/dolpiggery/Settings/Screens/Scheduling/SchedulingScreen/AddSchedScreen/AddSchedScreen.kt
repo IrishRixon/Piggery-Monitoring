@@ -1,4 +1,4 @@
-package com.example.dolpiggery.Settings.Screens.SchedulingScreen.AddSchedScreen
+package com.example.dolpiggery.Settings.Screens.Scheduling.SchedulingScreen.AddSchedScreen
 
 import android.util.Log
 import android.widget.Toast
@@ -36,7 +36,7 @@ import com.example.dolpiggery.MainScreen.UIComponents.Scheduling.AddSched.InputT
 import com.example.dolpiggery.MainScreen.UIComponents.Scheduling.AddSched.InputTime.timeZeroPadding
 import com.example.dolpiggery.MainScreen.UIComponents.Scheduling.AddSched.Repeat.DayRepeatButton
 import com.example.dolpiggery.MainScreen.UIComponents.Scheduling.AddSched.Targets.TargetButton
-import com.example.dolpiggery.Settings.ViewModel.AddSchedViewModel.AddSchedViewModel
+import com.example.dolpiggery.Settings.Screens.Scheduling.ViewModel.AddSchedViewModel.AddSchedViewModel
 import com.example.dolpiggery.ui.theme.Cerulean5
 import com.example.dolpiggery.ui.theme.Platinum
 import com.example.dolpiggery.ui.theme.Snow60

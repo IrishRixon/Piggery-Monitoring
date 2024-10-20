@@ -1,10 +1,10 @@
-package com.example.dolpiggery.Settings.ViewModel
+package com.example.dolpiggery.Settings.Screens.Scheduling.ViewModel
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
-import com.example.dolpiggery.Settings.DataClass.Scheduling.SchedulingDataClass
-import com.example.dolpiggery.Settings.Repository.SchedulingRepository
+import com.example.dolpiggery.Settings.Screens.Scheduling.DataClass.SchedulingDataClass
+import com.example.dolpiggery.Settings.Screens.Scheduling.Repository.SchedulingRepository
 
 class SchedulingViewModel: ViewModel() {
     val scheduleRepository = SchedulingRepository()

@@ -1,4 +1,4 @@
-package com.example.dolpiggery.Settings.Screens.SchedulingScreen
+package com.example.dolpiggery.Settings.Screens.Scheduling.SchedulingScreen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,7 +15,7 @@ import androidx.navigation.NavHostController
 import com.example.dolpiggery.Navigation.NavRoutes.Scheduling
 import com.example.dolpiggery.Navigation.NavigationCurrentPosition.NavigationCurrentPosition
 import com.example.dolpiggery.MainScreen.UIComponents.Scheduling.SchedTextButton
-import com.example.dolpiggery.Settings.ViewModel.SchedulingViewModel
+import com.example.dolpiggery.Settings.Screens.Scheduling.ViewModel.SchedulingViewModel
 import com.example.dolpiggery.ui.theme.PacificCyan5
 
 @Composable

@@ -1,6 +1,5 @@
 package com.example.dolpiggery.MainScreen.UIComponents.Scheduling
 
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -29,7 +28,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.dolpiggery.Navigation.NavRoutes.AddSched
-import com.example.dolpiggery.Settings.ViewModel.SchedulingViewModel
+import com.example.dolpiggery.Settings.Screens.Scheduling.ViewModel.SchedulingViewModel
 import com.example.dolpiggery.ui.theme.Cerulean5
 import com.example.dolpiggery.ui.theme.Snow60
 

@@ -14,10 +14,10 @@ import com.example.dolpiggery.Navigation.NavRoutes.Scheduling
 import com.example.dolpiggery.Navigation.NavRoutes.Settings
 import com.example.dolpiggery.Pigs.Screens.PigsScreen
 import com.example.dolpiggery.Environment.Screens.EnvironmentScreen
-import com.example.dolpiggery.Settings.Screens.ManageAccountsScreen.ManageAccountsScreen
-import com.example.dolpiggery.Settings.Screens.SchedulingScreen.AddSchedScreen.AddSchedScreen
-import com.example.dolpiggery.Settings.Screens.SchedulingScreen.SchedulingScreen
-import com.example.dolpiggery.Settings.Screens.SettingsScreen
+import com.example.dolpiggery.Settings.Screens.ManageAccounts.ManageAccountsScreen.ManageAccountsScreen
+import com.example.dolpiggery.Settings.Screens.Scheduling.SchedulingScreen.AddSchedScreen.AddSchedScreen
+import com.example.dolpiggery.Settings.Screens.Scheduling.SchedulingScreen.SchedulingScreen
+import com.example.dolpiggery.Settings.Screens.Scheduling.SettingsScreen
 
 @Composable
 fun AppNavGraph(navController: NavHostController) {

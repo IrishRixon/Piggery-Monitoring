@@ -1,12 +1,12 @@
-package com.example.dolpiggery.Settings.ViewModel.AddSchedViewModel
+package com.example.dolpiggery.Settings.Screens.Scheduling.ViewModel.AddSchedViewModel
 
 import android.widget.Toast
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.dolpiggery.MainScreen.MainScreenContext
-import com.example.dolpiggery.Settings.DataClass.Scheduling.AddAndEditScheduleDataClass
-import com.example.dolpiggery.Settings.Repository.AddSchedRepository
+import com.example.dolpiggery.Settings.Screens.Scheduling.DataClass.AddAndEditScheduleDataClass
+import com.example.dolpiggery.Settings.Screens.Scheduling.Repository.AddSchedRepository
 
 class AddSchedViewModel : ViewModel() {
     val addSchedRepository = AddSchedRepository()

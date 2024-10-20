@@ -1,4 +1,4 @@
-package com.example.dolpiggery.Settings.DataClass.Scheduling
+package com.example.dolpiggery.Settings.Screens.Scheduling.DataClass
 
 data class AddAndEditScheduleDataClass(
     val Targets: List<Int>,

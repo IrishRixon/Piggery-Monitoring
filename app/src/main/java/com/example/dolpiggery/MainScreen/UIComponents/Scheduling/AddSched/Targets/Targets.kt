@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.dolpiggery.Settings.ViewModel.AddSchedViewModel.AddSchedViewModel
+import com.example.dolpiggery.Settings.Screens.Scheduling.ViewModel.AddSchedViewModel.AddSchedViewModel
 import com.example.dolpiggery.ui.theme.PacificCyan5
 import com.example.dolpiggery.ui.theme.Platinum
 import com.example.dolpiggery.ui.theme.Snow60
