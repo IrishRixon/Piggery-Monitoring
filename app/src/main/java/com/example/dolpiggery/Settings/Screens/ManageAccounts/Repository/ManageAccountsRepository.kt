@@ -13,11 +13,7 @@ class ManageAccountsRepository {
     fun getUsersAccount(onGot: (List<UserAccount>) -> Unit) {
         Log.i("hi", "repo: Breakpoint")
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.100.23:5000/api/v1/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(API::class.java)
+        val retrofit = getRetrofit()
 
         Log.i("hi", "repo: Breakpoint1")
 
@@ -48,5 +44,31 @@ class ManageAccountsRepository {
                 Log.i("hi", "onFailure: ${p1.message}")
             }
         })
+    }
+
+    fun deleteAccount(uid: String, toast: () -> Unit) {
+        val retrofit = getRetrofit()
+
+        retrofit.deleteUser(uid).enqueue( object : Callback<Unit> {
+            override fun onResponse(p0: Call<Unit>, p1: Response<Unit>) {
+                if(p1.isSuccessful) {
+                    toast()
+                }
+            }
+
+            override fun onFailure(p0: Call<Unit>, p1: Throwable) {
+                Log.i("Yowsi", "delete user onFailure: ${p1.message}")
+            }
+
+        })
+
+    }
+
+    private fun getRetrofit(): API {
+        return Retrofit.Builder()
+            .baseUrl("http://192.168.100.23:5000/api/v1/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(API::class.java)
     }
 }

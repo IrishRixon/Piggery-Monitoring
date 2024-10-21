@@ -21,4 +21,10 @@ class ManageAccountViewModel: ViewModel() {
             Log.i("Yowsi", "getUsersAccount: ${listOfUsersAccount}")
         }
     }
+
+    fun deleteAccount(uid: String, toast: () -> Unit) {
+        manageAccountsRepository.deleteAccount(uid) {
+            toast()
+        }
+    }
 }

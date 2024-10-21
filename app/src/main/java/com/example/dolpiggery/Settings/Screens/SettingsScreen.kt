@@ -1,4 +1,4 @@
-package com.example.dolpiggery.Settings.Screens.Scheduling
+package com.example.dolpiggery.Settings.Screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
