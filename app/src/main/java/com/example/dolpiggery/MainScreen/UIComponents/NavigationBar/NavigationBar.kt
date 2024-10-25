@@ -32,9 +32,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.dolpiggery.Navigation.NavigationCurrentPosition.NavigationCurrentPosition
 import com.example.dolpiggery.Navigation.DataClass.NavBarItem.NavBarItem
+import com.example.dolpiggery.Navigation.NavRoutes.AddAccount
 import com.example.dolpiggery.Navigation.NavRoutes.AddSched
 import com.example.dolpiggery.Navigation.NavRoutes.Cubicle
 import com.example.dolpiggery.Navigation.NavRoutes.Environment
+import com.example.dolpiggery.Navigation.NavRoutes.ManageAccounts
 import com.example.dolpiggery.Navigation.NavRoutes.Scheduling
 import com.example.dolpiggery.Navigation.NavRoutes.Settings
 import com.example.dolpiggery.R
@@ -141,9 +143,15 @@ fun CreateTopBar(navController: NavHostController) {
             containerColor = PacificCyan5
         ),
         actions = {
-            if (currentNavLoc == Scheduling.toString()) {
+            if (
+                currentNavLoc == Scheduling.toString() ||
+                currentNavLoc == ManageAccounts.toString()
+            ) {
                 IconButton(
-                    onClick = { navController.navigate(AddSched())},
+                    onClick = {
+                        if (currentNavLoc == Scheduling.toString()) navController.navigate(AddSched())
+                        else navController.navigate(AddAccount)
+                    },
                     colors = IconButtonDefaults.iconButtonColors(contentColor = Snow60)
                 ) {
                     Icon(imageVector = Icons.Outlined.Add, contentDescription = null)

@@ -21,16 +21,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.dolpiggery.MainScreen.UIComponents.ManageAccounts.AccountCard
 import com.example.dolpiggery.MainScreen.UIComponents.ManageAccounts.DeleteConfirmationDialog
+import com.example.dolpiggery.Navigation.NavRoutes.ManageAccounts
+import com.example.dolpiggery.Navigation.NavigationCurrentPosition.NavigationCurrentPosition
 import com.example.dolpiggery.Settings.Screens.ManageAccounts.ViewModel.ManageAccountViewModel
 import com.example.dolpiggery.ui.theme.Cerulean5
 import com.example.dolpiggery.ui.theme.Platinum
 
 @Composable
 fun ManageAccountsScreen(navController: NavHostController) {
+
+    NavigationCurrentPosition.setCurrentNavDestination("$ManageAccounts")
+
     val viewModel: ManageAccountViewModel = viewModel()
 
     LaunchedEffect(key1 = Unit) {
@@ -47,20 +53,30 @@ fun ManageAccountsScreen(navController: NavHostController) {
         }
     }
     else {
+        if(viewModel.listOfUsersAccount.size == 1) {
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                Text(text = "No other accounts", fontSize = 20.sp)
+            }
+        }
+        else {
+            LazyColumn(
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                items(viewModel.listOfUsersAccount) {
+                    if (it.uid != "rP1Xjk74I9hARbytAqo6IQXjt9q2") {
+                        AccountCard(it.uid, it.email, it.phoneNumber, navController = navController)
 
-        LazyColumn(
-            verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxSize()
-        ) {
-            items(viewModel.listOfUsersAccount) {
-                if(it.uid != "rP1Xjk74I9hARbytAqo6IQXjt9q2") {
-                    AccountCard(it.uid, it.email, navController = navController)
-
-                    HorizontalDivider(
-                        color = Platinum,
-                        modifier = Modifier.padding(horizontal = 10.dp)
-                    )
+                        HorizontalDivider(
+                            color = Platinum,
+                            modifier = Modifier.padding(horizontal = 10.dp)
+                        )
+                    }
                 }
             }
         }

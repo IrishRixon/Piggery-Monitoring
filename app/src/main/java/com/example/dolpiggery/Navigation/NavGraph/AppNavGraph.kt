@@ -14,6 +14,8 @@ import com.example.dolpiggery.Navigation.NavRoutes.Scheduling
 import com.example.dolpiggery.Navigation.NavRoutes.Settings
 import com.example.dolpiggery.Pigs.Screens.PigsScreen
 import com.example.dolpiggery.Environment.Screens.EnvironmentScreen
+import com.example.dolpiggery.Navigation.NavRoutes.AddAccount
+import com.example.dolpiggery.Settings.Screens.ManageAccounts.ManageAccountsScreen.AddAccountScreen.AddAccountScreen
 import com.example.dolpiggery.Settings.Screens.ManageAccounts.ManageAccountsScreen.ManageAccountsScreen
 import com.example.dolpiggery.Settings.Screens.Scheduling.SchedulingScreen.AddSchedScreen.AddSchedScreen
 import com.example.dolpiggery.Settings.Screens.Scheduling.SchedulingScreen.SchedulingScreen
@@ -51,6 +53,9 @@ fun AppNavGraph(navController: NavHostController) {
         }
         composable<ManageAccounts> {
             ManageAccountsScreen(navController)
+        }
+        composable<AddAccount> {
+            AddAccountScreen(navController)
         }
     }
 }

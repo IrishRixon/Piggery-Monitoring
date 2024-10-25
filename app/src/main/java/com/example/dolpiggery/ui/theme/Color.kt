@@ -17,6 +17,7 @@ val Cerulean5 = Color(0xFF146C94)
 
 val Poppy = Color(0xFFD53838)
 val LimeGreen = Color(0xFF2BD041)
+val PigmentGreen = Color(0xFF2EA145)
 val Platinum = Color(0xFFE3E3E2)
 
-val transparentBg = Color.Black.copy(alpha = 0.8f)
+//val transparentBg = Color.Black.copy(alpha = 0.8f)

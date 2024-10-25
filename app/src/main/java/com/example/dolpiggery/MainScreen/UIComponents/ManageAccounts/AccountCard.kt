@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -33,6 +34,7 @@ import com.example.dolpiggery.ui.theme.Snow60
 fun AccountCard(
     uid: String,
     email: String,
+    phoneNumber: String,
     navController: NavHostController
 ) {
 
@@ -55,6 +57,8 @@ fun AccountCard(
         )
     ) {
         Row (
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(10.dp),
@@ -65,12 +69,13 @@ fun AccountCard(
             ){
                 Text(text = uid, color = Color.Gray, fontSize = 10.sp)
                 Text(text = email, fontSize = 18.sp)
+                Text(text = phoneNumber, color = Color.Gray, fontSize = 12.sp)
             }
 
             Row (
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.weight(0.2f)
+                modifier = Modifier.weight(0.2f).fillMaxHeight()
             ){
                 Button(
                     onClick = { showDialog.value = true },

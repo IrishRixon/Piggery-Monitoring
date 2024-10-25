@@ -27,3 +27,6 @@ data class AddSched (
 
 @Serializable
 object ManageAccounts
+
+@Serializable
+object AddAccount

@@ -67,9 +67,9 @@ fun LoginScreen() {
                 Spacer(modifier = Modifier.height(20.dp))
 
                 // These are the composables from UIComponents package
-                EmailOutlineTextField()
+                EmailOutlineTextField(viewModel = viewModel)
                 Spacer(modifier = Modifier.height(5.dp))
-                PasswordOutlineTextField()
+                PasswordOutlineTextField(viewModel = viewModel)
 
                 Spacer(modifier = Modifier.height(20.dp))
                 /* Invoked the LoginButton composable with lambda as an argument.

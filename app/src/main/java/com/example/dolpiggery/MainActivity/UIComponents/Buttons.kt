@@ -14,20 +14,25 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.dolpiggery.ui.theme.Cerulean5
 
 @Composable
-fun LoginButton(onClicked: () -> Unit) {
+fun LoginButton(
+    txt: String = "Log in",
+    defaultColor: Color = Cerulean5,
+    onClicked: () -> Unit
+) {
     // This is the UI of Login Button
     Button(
         onClick = { onClicked() }, // This invoked the lambda that passed as an argument
-        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF146C94),
+        colors = ButtonDefaults.buttonColors(containerColor = defaultColor,
             contentColor = Color(0xFFF6F1F1)),
         contentPadding = PaddingValues(15.dp),
         modifier = Modifier
             .fillMaxWidth()
     ) {
         Text(
-            text = "Log in",
+            text = txt,
             fontSize = 18.sp,
             fontWeight = FontWeight(700)
         )
