@@ -150,7 +150,7 @@ fun CreateTopBar(navController: NavHostController) {
                 IconButton(
                     onClick = {
                         if (currentNavLoc == Scheduling.toString()) navController.navigate(AddSched())
-                        else navController.navigate(AddAccount)
+                        else navController.navigate(AddAccount())
                     },
                     colors = IconButtonDefaults.iconButtonColors(contentColor = Snow60)
                 ) {

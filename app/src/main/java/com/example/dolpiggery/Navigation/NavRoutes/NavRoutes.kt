@@ -29,4 +29,8 @@ data class AddSched (
 object ManageAccounts
 
 @Serializable
-object AddAccount
+data class AddAccount(
+    val emailTxt: String = "",
+    val phoneNumber: String = "+639",
+    val uid: String? = null
+)

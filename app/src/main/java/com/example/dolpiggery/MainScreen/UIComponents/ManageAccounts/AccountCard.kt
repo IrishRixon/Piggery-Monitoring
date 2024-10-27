@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.dolpiggery.Navigation.NavRoutes.AddAccount
 import com.example.dolpiggery.ui.theme.Poppy
 import com.example.dolpiggery.ui.theme.Snow60
 
@@ -43,7 +44,11 @@ fun AccountCard(
     }
 
     TextButton(
-        onClick = { },
+        onClick = { navController.navigate(AddAccount(
+            emailTxt = email,
+            phoneNumber = phoneNumber,
+            uid = uid
+        )) },
         modifier = Modifier
             .fillMaxWidth(),
 //            .height(120.dp),

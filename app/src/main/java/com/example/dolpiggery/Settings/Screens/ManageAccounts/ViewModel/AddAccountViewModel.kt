@@ -8,7 +8,7 @@ import com.example.dolpiggery.MainScreen.MainScreen
 import com.example.dolpiggery.MainScreen.MainScreenContext
 import com.example.dolpiggery.Settings.Screens.ManageAccounts.Repository.AddAccountRepository
 
-class AddAccountViewModel: ViewModel() {
+class AddAccountViewModel : ViewModel() {
     val addAccountRepository = AddAccountRepository()
 
     // Initialized the mutableStates
@@ -29,14 +29,13 @@ class AddAccountViewModel: ViewModel() {
     }
 
     fun addAccount(context: MainScreen, toast: (code: Int, txt: String) -> Unit) {
-        if(emailTxt.value.isEmpty() || passwordTxt.value.isEmpty()) {
+        if (emailTxt.value.isEmpty() || passwordTxt.value.isEmpty()) {
             Toast.makeText(
                 MainScreenContext.getContext(),
                 "Please fill all fields",
                 Toast.LENGTH_SHORT
             ).show()
-        }
-        else {
+        } else {
             addAccountRepository.addAccount(
                 email = emailTxt.value,
                 password = passwordTxt.value,
@@ -46,5 +45,24 @@ class AddAccountViewModel: ViewModel() {
         }
 
         Log.i("Yowsi", "addAccount: ${emailTxt.value} ${passwordTxt.value} ${phoneNumber.value}")
+    }
+
+    fun patchAccount(uid: String, toast: (code: Int, txt: String) -> Unit) {
+        if (emailTxt.value.isEmpty()) {
+            Toast.makeText(
+                MainScreenContext.getContext(),
+                "Please fill all fields",
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {    
+            addAccountRepository.patchAccount(
+                uid = uid,
+                email = emailTxt.value,
+                password = passwordTxt.value,
+                phoneNumber = phoneNumber.value
+            ) { code, txt ->
+                toast(code, txt)
+            }
+        }
     }
 }

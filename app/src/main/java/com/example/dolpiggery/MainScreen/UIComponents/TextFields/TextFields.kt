@@ -46,6 +46,7 @@ fun AddAccountEmailOutlineTextField(
 fun AddAccountPasswordOutlineTextField(
     defaultColor: Color = Snow60,
     viewModel: AddAccountViewModel,
+    label: String,
     defaultSupportingText: @Composable (() -> Unit)? = null
 ) {
     var showPassword by remember { mutableStateOf(false) }
@@ -53,7 +54,7 @@ fun AddAccountPasswordOutlineTextField(
     DefaultOutlineTextField(
         value = viewModel.passwordTxt.value,
         onValueChange = { viewModel.setPasswordTxt(it) },
-        label = "Password",
+        label = label,
         leadingIcon = Icons.Default.Lock,
         visualTransformation =  if (showPassword) VisualTransformation.None else PasswordVisualTransformation(),
         trailingIcon = {
