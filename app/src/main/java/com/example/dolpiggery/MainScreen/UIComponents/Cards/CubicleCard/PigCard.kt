@@ -32,6 +32,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.dolpiggery.MainActivity.CurrentUserUID
 import com.example.dolpiggery.Pigs.ViewModel.Cubicles.CubiclesViewModel
 import com.example.dolpiggery.R
 import com.example.dolpiggery.ui.theme.LimeGreen
@@ -204,31 +205,32 @@ fun PigCard(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-
-                    Switch(
-                        checked = sprinklerSwitch,
-                        onCheckedChange = {
-                            viewModel.toggleSprinklerSwitch(
-                                sprinklerSwitch,
-                                pigID
+                    if(CurrentUserUID.getUID() == "8F8R3yapjONx6wshGhB84f9HOnS2") {
+                        Switch(
+                            checked = sprinklerSwitch,
+                            onCheckedChange = {
+                                viewModel.toggleSprinklerSwitch(
+                                    sprinklerSwitch,
+                                    pigID
+                                )
+                            },
+                            thumbContent = {
+                                Icon(
+                                    painter = painterResource(id = if (!sprinklerSwitch) R.drawable.shower_off else R.drawable.shower_on),
+                                    contentDescription = null,
+                                    modifier = Modifier.size(18.dp)
+                                )
+                            },
+                            colors = SwitchDefaults.colors(
+                                uncheckedTrackColor = Color.Gray,
+                                uncheckedThumbColor = Snow60,
+                                checkedTrackColor = LimeGreen,
+                                checkedThumbColor = Snow60,
+                                checkedIconColor = Color.Black,
+                                uncheckedIconColor = Color.Gray
                             )
-                        },
-                        thumbContent = {
-                            Icon(
-                                painter = painterResource(id = if (!sprinklerSwitch) R.drawable.shower_off else R.drawable.shower_on),
-                                contentDescription = null,
-                                modifier = Modifier.size(18.dp)
-                            )
-                        },
-                        colors = SwitchDefaults.colors(
-                            uncheckedTrackColor = Color.Gray,
-                            uncheckedThumbColor = Snow60,
-                            checkedTrackColor = LimeGreen,
-                            checkedThumbColor = Snow60,
-                            checkedIconColor = Color.Black,
-                            uncheckedIconColor = Color.Gray
                         )
-                    )
+                    }
                 }
             }
         }

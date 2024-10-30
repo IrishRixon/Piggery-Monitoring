@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.example.dolpiggery.MainActivity.CurrentUserUID
 import com.example.dolpiggery.Navigation.NavRoutes.AddSched
 import com.example.dolpiggery.Settings.Screens.Scheduling.ViewModel.SchedulingViewModel
 import com.example.dolpiggery.ui.theme.Cerulean5
@@ -148,9 +149,10 @@ fun SettingsScreenCustomTextButton(
         colors = ButtonColors(
             containerColor = Snow60,
             contentColor = Color.Black,
-            disabledContainerColor = Color.LightGray,
-            disabledContentColor = Color.Black
+            disabledContainerColor = Snow60,
+            disabledContentColor = Color.Gray
         ),
+        enabled = CurrentUserUID.getUID() == "8F8R3yapjONx6wshGhB84f9HOnS2",
         onClick = { navController.navigate(goTo) }
     ) {
         Row(
