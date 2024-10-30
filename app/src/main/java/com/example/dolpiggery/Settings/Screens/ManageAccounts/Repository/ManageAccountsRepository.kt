@@ -3,6 +3,7 @@ package com.example.dolpiggery.Settings.Screens.ManageAccounts.Repository
 import android.util.Log
 import com.example.dolpiggery.Settings.Screens.ManageAccounts.DataClass.UserAccount
 import com.example.dolpiggery.Settings.Screens.ManageAccounts.Interface.API
+import com.google.firebase.database.FirebaseDatabase
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -11,6 +12,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ManageAccountsRepository {
+    val databaseReference = FirebaseDatabase.getInstance().getReference()
+
     fun getUsersAccount(onGot: (List<UserAccount>) -> Unit) {
         Log.i("hi", "repo: Breakpoint")
 
@@ -47,6 +50,7 @@ class ManageAccountsRepository {
             override fun onResponse(p0: Call<Unit>, p1: Response<Unit>) {
                 if(p1.isSuccessful) {
                     toast()
+                    deletePhoneNumber(uid)
                 }
             }
 
@@ -63,5 +67,9 @@ class ManageAccountsRepository {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(API::class.java)
+    }
+
+    fun deletePhoneNumber(uid: String) {
+        databaseReference.child("phoneNumber").child(uid).removeValue()
     }
 }

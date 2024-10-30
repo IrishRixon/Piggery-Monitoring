@@ -1,5 +1,6 @@
 package com.example.dolpiggery.Settings.Screens.ManageAccounts.Interface
 
+import com.example.dolpiggery.Settings.Screens.ManageAccounts.DataClass.CreateUserResponse
 import com.example.dolpiggery.Settings.Screens.ManageAccounts.DataClass.User
 import com.example.dolpiggery.Settings.Screens.ManageAccounts.DataClass.UserAccount
 import okhttp3.ResponseBody
@@ -19,7 +20,7 @@ interface API {
     fun deleteUser(@Path("uid") uid: String) : Call<Unit>
 
     @POST("addAccount")
-    fun addAccount(@Body user: User): Call<ResponseBody>
+    fun addAccount(@Body user: User): Call<CreateUserResponse>
 
     @PATCH("patchAccount/{uid}")
     fun patchAccount(@Body user: User, @Path("uid") uid: String): Call<Unit>

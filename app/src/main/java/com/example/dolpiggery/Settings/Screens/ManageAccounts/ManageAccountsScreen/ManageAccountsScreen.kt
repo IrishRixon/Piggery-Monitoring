@@ -127,7 +127,7 @@ fun ManageAccountsScreen(
                 modifier = Modifier.fillMaxSize()
             ) {
                 items(viewModel.listOfUsersAccount) {
-                    if (it.uid != "dKIMZ74FjtSmvYw4GV5iYW1z0Dg1") {
+                    if (it.uid != "8F8R3yapjONx6wshGhB84f9HOnS2") {
                         AccountCard(
                             uid = it.uid,
                             email = it.email,

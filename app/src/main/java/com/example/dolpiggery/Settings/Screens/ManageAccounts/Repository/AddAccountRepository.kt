@@ -1,8 +1,10 @@
 package com.example.dolpiggery.Settings.Screens.ManageAccounts.Repository
 
 import android.util.Log
+import com.example.dolpiggery.Settings.Screens.ManageAccounts.DataClass.CreateUserResponse
 import com.example.dolpiggery.Settings.Screens.ManageAccounts.DataClass.User
 import com.example.dolpiggery.Settings.Screens.ManageAccounts.Interface.API
+import com.google.firebase.database.FirebaseDatabase
 import okhttp3.ResponseBody
 import org.json.JSONException
 import org.json.JSONObject
@@ -13,6 +15,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class AddAccountRepository {
+    val databaseReference = FirebaseDatabase.getInstance().getReference()
 
     fun addAccount(
         email: String,
@@ -23,11 +26,13 @@ class AddAccountRepository {
         val api = getAPI()
         val user = User(email, password, phoneNumber)
 
-        api.addAccount(user = user).enqueue(object : Callback<ResponseBody> {
-            override fun onResponse(p0: Call<ResponseBody>, p1: Response<ResponseBody>) {
+        api.addAccount(user = user).enqueue(object : Callback<CreateUserResponse> {
+            override fun onResponse(p0: Call<CreateUserResponse>, p1: Response<CreateUserResponse>) {
                 Log.i("Yowsi", "onResponse: ${p1.errorBody()}")
                 if(p1.isSuccessful) {
-                    toast(p1.code(), "Successfully Added account '$email'")
+                    val message = p1.body()?.message
+                    toast(p1.code(), message.toString())
+                    storePhoneNumber(p1.body()?.uid.toString(), phoneNumber)
                 }
                 else {
                     // Parse the error response from JSON
@@ -38,7 +43,7 @@ class AddAccountRepository {
                 }
             }
 
-            override fun onFailure(p0: Call<ResponseBody>, p1: Throwable) {
+            override fun onFailure(p0: Call<CreateUserResponse>, p1: Throwable) {
                 toast(400,"${p1.message}")
             }
 
@@ -52,16 +57,15 @@ class AddAccountRepository {
         phoneNumber: String,
         toast: (code: Int, txt: String) -> Unit
     ) {
-        Log.i("Yowsi", "patchAccount: Breakpoint")
 
         val api = getAPI()
         val user = User(email, password, phoneNumber)
 
         api.patchAccount(user, uid).enqueue(object : Callback<Unit> {
             override fun onResponse(p0: Call<Unit>, p1: Response<Unit>) {
-                Log.i("Yowsi", "patchAccount: Breakpoint2")
                 if(p1.isSuccessful) {
                     toast(200, "Successfully updated '$email'")
+                    updatePhoneNumber(uid, phoneNumber)
                 }
                 else {
                     val errorResponse = p1.errorBody()?.string()
@@ -83,5 +87,13 @@ class AddAccountRepository {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(API::class.java)
+    }
+
+    fun storePhoneNumber(uid: String, phoneNumber: String) {
+        databaseReference.child("phoneNumber").child(uid).setValue(phoneNumber)
+    }
+
+    fun updatePhoneNumber(uid: String, phoneNumber: String) {
+        databaseReference.child("phoneNumber").child(uid).setValue(phoneNumber)
     }
 }

@@ -21,16 +21,20 @@ class PigsRepository {
                 var pigID: Int
                 var bodyTemp: String
                 var valveSwitch: Boolean
+                var counter: Int
+                var timer: Int
 
                 val pigsList = mutableListOf<PigsDataClass>()
 
                 if(snapshot.exists()) {
                     for(pig in snapshot.children) {
                         pigID = pig.child("Pig_ID").value.toString().toInt()
-                        bodyTemp = pig.child("Body_Temp").value.toString()
+                        bodyTemp = pig.child("BodyTemp").value.toString()
                         valveSwitch = pig.child("Valve_Switch").value.toString().toBoolean()
+                        counter = pig.child("counter").value.toString().toInt()
+                        timer = pig.child("timer").value.toString().toInt()
 
-                        val item = PigsDataClass(pigID, bodyTemp, valveSwitch)
+                        val item = PigsDataClass(pigID, bodyTemp, valveSwitch, counter, timer)
                         pigsList.add(item)
                         onDataChanged(pigsList)
                     }
