@@ -15,7 +15,9 @@ class MeasurementRepository {
         onTempChange: (String) -> Unit,
         onHumidityChange: (String) -> Unit,
         onWaterDailyChange: (String) -> Unit,
-        onWaterMonthlyChange: (String) -> Unit
+        onWaterMonthlyChange: (String) -> Unit,
+        onCleanChanged: (Boolean) -> Unit,
+        onHeatIndexChanged: (String) -> Unit,
     ) {
         databaseRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -24,11 +26,15 @@ class MeasurementRepository {
                     val humidityRef = snapshot.child("Humidity")
                     val waterDailyRef = snapshot.child("Water_consump").child("daily").child("value");
                     val waterMonthlyRef = snapshot.child("Water_consump").child("weekly").child("value")
+                    val clean = snapshot.child("Clean")
+                    val heatIndex = snapshot.child("HeatIndex")
 
                     onTempChange(tempRef.value.toString())
                     onHumidityChange(humidityRef.value.toString())
                     onWaterDailyChange(waterDailyRef.value.toString())
                     onWaterMonthlyChange(waterMonthlyRef.value.toString())
+                    onCleanChanged(clean.value.toString().toBoolean())
+                    onHeatIndexChanged(heatIndex.value.toString())
                 }
             }
 

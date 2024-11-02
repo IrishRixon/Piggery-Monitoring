@@ -49,7 +49,7 @@ fun createNavBarItemsList(): List<NavBarItem> {
     // Create a list of nav buttons
     val items = listOf(
         NavBarItem(
-            title = "Cubicles",
+            title = "Pigs",
             route = Cubicle,
             selectedIcon = R.drawable.filled_pig,
             unselectedIcon = R.drawable.outlined_pig,

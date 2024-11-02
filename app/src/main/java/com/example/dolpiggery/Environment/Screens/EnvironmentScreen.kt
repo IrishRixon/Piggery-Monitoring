@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -25,6 +26,8 @@ import com.example.dolpiggery.MainScreen.UIComponents.Measurement.Cards.TempCard
 import com.example.dolpiggery.MainScreen.UIComponents.Measurement.Cards.WaterConsumpCard
 import com.example.dolpiggery.Environment.ViewModel.BarGraph.BarGraphViewModel
 import com.example.dolpiggery.Environment.ViewModel.Measurement.MeasurementViewModel
+import com.example.dolpiggery.MainScreen.UIComponents.Measurement.Cards.Clean
+import com.example.dolpiggery.MainScreen.UIComponents.Measurement.Cards.Heatindex
 import com.example.dolpiggery.ui.theme.PacificCyan5
 import com.example.dolpiggery.ui.theme.Snow60
 
@@ -70,12 +73,13 @@ fun EnvironmentScreen() {
         var humidityValue = "--"
         var waterDailyValue = "--"
         var waterMonthlyValue = "--"
+        var heatIndex = "--"
 
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .height(330.dp)
+                .height(450.dp)
                 .fillMaxWidth()
         ) {
             if (viewModelMeasurement.temp.value.isNotEmpty()) {
@@ -90,6 +94,10 @@ fun EnvironmentScreen() {
             if (viewModelMeasurement.waterMonthly.value.isNotEmpty()) {
                 waterMonthlyValue = viewModelMeasurement.waterMonthly.value
             }
+            if(viewModelMeasurement.heatIndex.value.isNotEmpty()) {
+                heatIndex = viewModelMeasurement.heatIndex.value
+            }
+
 
             Row(
                 horizontalArrangement = Arrangement.SpaceAround,
@@ -101,6 +109,21 @@ fun EnvironmentScreen() {
                 TempCard(value = tempValue)
                 HumidityCard(value = humidityValue)
             }
+
+            Spacer(modifier = Modifier.height(20.dp))
+            
+            Row(
+                horizontalArrangement = Arrangement.SpaceAround,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(0.3f)
+            ) {
+                Heatindex(value = heatIndex)
+                Clean(value = viewModelMeasurement.clean.value)
+            }
+
+
 
             Row(
                 horizontalArrangement = Arrangement.SpaceAround,

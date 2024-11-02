@@ -1,5 +1,6 @@
 package com.example.dolpiggery.Pigs.Repository
 
+import android.util.Log
 import android.widget.Toast
 import com.example.dolpiggery.MainScreen.MainScreenContext
 import com.example.dolpiggery.Pigs.DataClass.Pigs.PigsDataClass
@@ -31,7 +32,7 @@ class PigsRepository {
                         pigID = pig.child("Pig_ID").value.toString().toInt()
                         bodyTemp = pig.child("BodyTemp").value.toString()
                         valveSwitch = pig.child("Valve_Switch").value.toString().toBoolean()
-                        counter = pig.child("counter").value.toString().toInt()
+                        counter = pig.child("counter").child("count").value.toString().toInt()
                         timer = pig.child("timer").value.toString().toInt()
 
                         val item = PigsDataClass(pigID, bodyTemp, valveSwitch, counter, timer)
@@ -42,7 +43,7 @@ class PigsRepository {
             }
 
             override fun onCancelled(error: DatabaseError) {
-
+                Log.e("Yowsi", "onCancelled: $error" )
             }
 
         })

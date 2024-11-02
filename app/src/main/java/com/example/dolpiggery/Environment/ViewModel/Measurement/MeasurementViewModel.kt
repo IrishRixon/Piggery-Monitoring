@@ -11,6 +11,8 @@ class MeasurementViewModel: ViewModel() {
     val humidity = mutableStateOf("")
     val waterDaily = mutableStateOf("")
     val waterMonthly = mutableStateOf("")
+    val clean = mutableStateOf(true)
+    val heatIndex = mutableStateOf("")
 
     fun addMeasurements() {
         measurementRepository.addMeasurements(
@@ -25,6 +27,12 @@ class MeasurementViewModel: ViewModel() {
             },
             onWaterMonthlyChange = {
                 waterMonthly.value = it
+            },
+            onCleanChanged = {
+                clean.value = it
+            },
+            onHeatIndexChanged = {
+                heatIndex.value = it
             }
         )
     }

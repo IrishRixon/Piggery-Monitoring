@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -18,13 +19,20 @@ import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.dolpiggery.R
+import com.example.dolpiggery.ui.theme.DarkPastelGreen
+import com.example.dolpiggery.ui.theme.LimeGreen
 import com.example.dolpiggery.ui.theme.Platinum
+import com.example.dolpiggery.ui.theme.Poppy
+import com.example.dolpiggery.ui.theme.Snow60
 import java.util.Locale
 
 @Composable
@@ -119,6 +127,97 @@ fun HumidityCard(
                     fontSize = 30.sp,
                     fontFamily = FontFamily(Font(R.font.roboto_bold))
                 )
+            }
+        }
+    }
+}
+
+@Composable
+fun Heatindex(
+    value: String
+) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = Platinum
+        ),
+        modifier = Modifier
+            .height(100.dp)
+            .width(150.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.SpaceAround,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(0.3f)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.heatindex),
+                    contentDescription = null,
+                )
+
+                Text(text = "Heat Index")
+            }
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(0.7f)
+            ) {
+                Text(
+                    text = "$value°C",
+                    fontSize = 30.sp,
+                    fontFamily = FontFamily(Font(R.font.roboto_bold))
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun Clean(
+    value: Boolean
+) {
+    var color: Color
+    var txt: String
+
+    if(value) {
+        color = DarkPastelGreen
+        txt = "Clean"
+    }
+    else {
+        color = Poppy
+        txt = "Need to be Clean"
+    }
+
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = color
+        ),
+        modifier = Modifier
+            .height(100.dp)
+            .width(150.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.SpaceAround,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(0.3f)
+            ) {
+
+                Text(text = txt, fontSize = 20.sp, color = Snow60, textAlign = TextAlign.Center)
             }
         }
     }

@@ -21,5 +21,6 @@ val PigmentGreen = Color(0xFF2EA145)
 val Platinum = Color(0xFFE3E3E2)
 val EgyptianBlue = Color(0xFF1F3EA1)
 val Orange = Color(0xFFCC7C35)
+val DarkPastelGreen = Color(0xFF27BD2C)
 
 //val transparentBg = Color.Black.copy(alpha = 0.8f)

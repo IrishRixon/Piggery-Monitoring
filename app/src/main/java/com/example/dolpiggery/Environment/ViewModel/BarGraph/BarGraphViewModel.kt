@@ -8,6 +8,8 @@ import co.yml.charts.common.model.Point
 import co.yml.charts.ui.barchart.models.BarData
 import com.example.dolpiggery.Environment.DataClass.BarGraph.BarGraphDataClass
 import com.example.dolpiggery.Environment.Repository.BarGraph.BarGraphRepository
+import com.example.dolpiggery.ui.theme.PacificCyan5
+import com.example.dolpiggery.ui.theme.Poppy
 
 class BarGraphViewModel : ViewModel() {
     val barGraphRepository = BarGraphRepository()
@@ -54,6 +56,7 @@ class BarGraphViewModel : ViewModel() {
 
                 barDataList.add(
                     BarData(
+                        color = if(data.highestTemp >= 30) Poppy else PacificCyan5,
                         point = Point(
                             x = i.toFloat(),
                             y = data.highestTemp.toFloat() / 5f,
