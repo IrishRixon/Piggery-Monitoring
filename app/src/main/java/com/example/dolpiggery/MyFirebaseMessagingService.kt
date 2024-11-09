@@ -65,7 +65,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         remoteView.setTextViewText(R.id.title, title)
         remoteView.setTextViewText(R.id.message, message)
-        remoteView.setImageViewResource(R.id.appLogo, R.drawable.swine_shine)
 
         return remoteView
     }

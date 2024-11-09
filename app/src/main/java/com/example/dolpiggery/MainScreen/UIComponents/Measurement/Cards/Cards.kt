@@ -76,7 +76,7 @@ fun TempCard(
                 Text(
                     text = "$value°C",
                     fontSize = 30.sp,
-                    fontFamily = FontFamily(Font(R.font.roboto_bold))
+                    fontFamily = FontFamily(Font(R.font.roboto_medium))
                 )
             }
         }
@@ -125,7 +125,7 @@ fun HumidityCard(
                 Text(
                     text = "$value%",
                     fontSize = 30.sp,
-                    fontFamily = FontFamily(Font(R.font.roboto_bold))
+                    fontFamily = FontFamily(Font(R.font.roboto_medium))
                 )
             }
         }
@@ -173,7 +173,7 @@ fun Heatindex(
                 Text(
                     text = "$value°C",
                     fontSize = 30.sp,
-                    fontFamily = FontFamily(Font(R.font.roboto_bold))
+                    fontFamily = FontFamily(Font(R.font.roboto_medium))
                 )
             }
         }
@@ -299,7 +299,7 @@ fun WaterConsumpCard(
                         Text(
                             text = "$formattedDaily L",
                             fontSize = 30.sp,
-                            fontFamily = FontFamily(Font(R.font.roboto_bold))
+                            fontFamily = FontFamily(Font(R.font.roboto_medium))
                         )
                     }
                 }
@@ -331,7 +331,7 @@ fun WaterConsumpCard(
                         Text(
                             text = "$formattedMonthly L",
                             fontSize = 30.sp,
-                            fontFamily = FontFamily(Font(R.font.roboto_bold))
+                            fontFamily = FontFamily(Font(R.font.roboto_medium))
                         )
                     }
                 }
