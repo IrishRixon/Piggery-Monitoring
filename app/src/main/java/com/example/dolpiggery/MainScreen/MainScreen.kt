@@ -1,6 +1,11 @@
 package com.example.dolpiggery.MainScreen
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.os.PowerManager
+import android.provider.Settings
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -21,6 +26,7 @@ import com.example.dolpiggery.Navigation.NavGraph.AppNavGraph
 import com.example.dolpiggery.MainScreen.UIComponents.NavigationBar.CreateNavBar
 import com.example.dolpiggery.MainScreen.UIComponents.NavigationBar.CreateTopBar
 import com.example.dolpiggery.MainScreen.ViewModel.MainScreenViewModel
+import com.example.dolpiggery.PersistentForegroundService
 import com.example.dolpiggery.ui.theme.DolPiggeryTheme
 import com.example.dolpiggery.ui.theme.Snow60
 import com.google.firebase.Firebase
@@ -37,6 +43,15 @@ class MainScreen : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val intent = Intent()
+            val packageName = packageName
+            val pm = getSystemService(Context.POWER_SERVICE) as PowerManager
+
+
+            Intent(this, PersistentForegroundService::class.java).also { intent ->
+                startForegroundService(intent)
+            }
+
             DolPiggeryTheme {
                 //Initialize the navController that will be used to control the navigation
                 val navController = rememberNavController()
