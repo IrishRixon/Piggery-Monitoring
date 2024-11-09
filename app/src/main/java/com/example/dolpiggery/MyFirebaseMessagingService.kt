@@ -20,6 +20,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(message: RemoteMessage) {
         Log.i("hello", "${message}")
+
+        startForegroundServiceIfNeeded()
+
         message.notification?.let {
             Log.i("hello", "dito")
             generateNotification(it.title ?: "Default Title", it.body ?: "Default Body")
@@ -41,7 +44,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val pending = PendingIntent.getActivity(this, 0, intent,
             PendingIntent.FLAG_UPDATE_CURRENT)
 
-        var builder: NotificationCompat.Builder = NotificationCompat.Builder(applicationContext, R.string.default_notification_channel_id.toString())
+        var builder: NotificationCompat.Builder = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
             .setSmallIcon(R.drawable.swine_shine)
             .setAutoCancel(true)
             .setVibrate(longArrayOf(1000, 1000, 1000, 1000))
@@ -52,10 +55,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 //        startForegroundService(intent)
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val notificationChannel = NotificationChannel(R.string.default_notification_channel_id.toString(), CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH)
-            notificationManager.createNotificationChannel(notificationChannel)
-        }
+        val notificationChannel = NotificationChannel(R.string.default_notification_channel_id.toString(), CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH)
+        notificationManager.createNotificationChannel(notificationChannel)
 
         notificationManager.notify(System.currentTimeMillis().toInt(), builder.build())
     }
@@ -65,8 +66,12 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         remoteView.setTextViewText(R.id.title, title)
         remoteView.setTextViewText(R.id.message, message)
-        remoteView.setImageViewResource(R.id.appLogo, R.drawable.swine_shine)
 
         return remoteView
+    }
+
+    private fun startForegroundServiceIfNeeded() {
+        val serviceIntent = Intent(this, PersistentForegroundService::class.java)
+        startForegroundService(serviceIntent)
     }
 }
