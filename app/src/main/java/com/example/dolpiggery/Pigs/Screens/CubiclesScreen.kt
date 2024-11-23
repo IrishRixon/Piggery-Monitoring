@@ -52,11 +52,13 @@ fun PigsScreen(navController: NavHostController) {
             // Iterate the cubicleList and invoke the CubicleCard Composables with the needed arguments
             items(viewModel.pigsList) {
                 PigCard(
+                    viewModel = viewModel,
                     pigID = it.pigID,
                     sprinklerSwitch = it.valveSwitch,
                     pigBodyTemp = it.bodyTemp,
                     counter = it.counter,
-                    timer = it.timer
+                    timer = it.timer,
+                    isActive = it.isActive
                 )
                 HorizontalDivider()
             }

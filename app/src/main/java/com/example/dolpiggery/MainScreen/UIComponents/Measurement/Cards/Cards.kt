@@ -170,6 +170,7 @@ fun Heatindex(
                     .fillMaxWidth()
                     .weight(0.7f)
             ) {
+
                 Text(
                     text = "$value°C",
                     fontSize = 30.sp,

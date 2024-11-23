@@ -36,7 +36,8 @@ class MainScreenRepository {
 
     private fun getAPI() : API {
         return Retrofit.Builder()
-            .baseUrl("http://192.168.100.23:5000/api/v1/")
+            //.baseUrl("http://192.168.100.23:5000/api/v1/") // HOME Wifi
+            .baseUrl("http://192.168.6.101:5000/api/v1/") //Dungca Wifi
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(API::class.java)

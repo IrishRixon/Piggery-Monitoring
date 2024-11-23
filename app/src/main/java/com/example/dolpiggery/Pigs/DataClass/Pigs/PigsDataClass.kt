@@ -5,5 +5,6 @@ data class PigsDataClass(
     val bodyTemp: String,
     val valveSwitch: Boolean,
     val counter: Int,
-    val timer: Int
+    val timer: Int,
+    val isActive: Boolean
 )

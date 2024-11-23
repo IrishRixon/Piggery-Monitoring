@@ -58,6 +58,8 @@ class MainScreen : ComponentActivity() {
                 val viewModel: MainScreenViewModel = viewModel()
                 getTokenAndSubscribe(viewModel)
 
+                viewModel.initialized()
+
 
                 // Scaffold is used to create top bar and bottom bar
                 Scaffold(

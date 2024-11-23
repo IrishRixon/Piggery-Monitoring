@@ -1,6 +1,9 @@
 package com.example.dolpiggery.Pigs.ViewModel.Cubicles
 
+import android.util.Log
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.dolpiggery.Pigs.DataClass.Pigs.PigsDataClass
 import com.example.dolpiggery.Pigs.Repository.PigsRepository
@@ -9,15 +12,19 @@ class CubiclesViewModel : ViewModel() {
     val cubiclesRepository = PigsRepository() // Create an instance of CubicleRepository
 
     val pigsList = mutableStateListOf<PigsDataClass>() // initialize a mutable state of list that takes CubicleDataClass
+    val justInitialized = mutableStateOf(true)
+    val repoNumExec = mutableIntStateOf(0)
 
     var minutesString: String = "--"
     var secondsString: String = "--"
 
     // A function to invoke the getCubiclesList function, and pass a lambda to clear and then addAll the list
     fun addCubicles(){
+        Log.i("Yowsi", "addCubicles: addedlist")
        cubiclesRepository.getPigsList {
            pigsList.clear()
            pigsList.addAll(it)
+
        }
     }
 

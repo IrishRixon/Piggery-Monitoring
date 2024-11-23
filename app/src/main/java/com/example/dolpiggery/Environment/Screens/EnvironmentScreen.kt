@@ -30,6 +30,7 @@ import com.example.dolpiggery.MainScreen.UIComponents.Measurement.Cards.Clean
 import com.example.dolpiggery.MainScreen.UIComponents.Measurement.Cards.Heatindex
 import com.example.dolpiggery.ui.theme.PacificCyan5
 import com.example.dolpiggery.ui.theme.Snow60
+import java.util.Locale
 
 @Composable
 fun EnvironmentScreen() {
@@ -119,7 +120,9 @@ fun EnvironmentScreen() {
                     .fillMaxWidth()
                     .weight(0.3f)
             ) {
-                Heatindex(value = heatIndex)
+                var heatIndexDouble = heatIndex.toDoubleOrNull() ?: 0.0
+                var heatIndexFormat = String.format(Locale.getDefault(),"%.1f", heatIndexDouble)
+                Heatindex(value = heatIndexFormat)
                 Clean(value = viewModelMeasurement.clean.value)
             }
 

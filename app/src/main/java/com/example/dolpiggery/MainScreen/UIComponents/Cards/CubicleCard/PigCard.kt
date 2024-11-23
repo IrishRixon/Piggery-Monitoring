@@ -1,5 +1,6 @@
 package com.example.dolpiggery.MainScreen.UIComponents.Cards.CubicleCard
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,6 +14,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.PlainTooltip
@@ -26,6 +29,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -37,6 +41,7 @@ import com.example.dolpiggery.Pigs.ViewModel.Cubicles.CubiclesViewModel
 import com.example.dolpiggery.R
 import com.example.dolpiggery.ui.theme.LimeGreen
 import com.example.dolpiggery.ui.theme.Orange
+import com.example.dolpiggery.ui.theme.Platinum
 import com.example.dolpiggery.ui.theme.Poppy
 import com.example.dolpiggery.ui.theme.Snow60
 import java.util.Locale
@@ -44,14 +49,15 @@ import java.util.Locale
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PigCard(
+    viewModel: CubiclesViewModel,
     pigID: Int,
     pigBodyTemp: String,
     sprinklerSwitch: Boolean,
     counter: Int,
-    timer: Int
+    timer: Int,
+    isActive: Boolean
 ) {
-
-    val viewModel: CubiclesViewModel = viewModel()
+//    val viewModel: CubiclesViewModel = viewModel()
     val pigBodyTempTooltipState = rememberTooltipState()
     val counterTooltipState = rememberTooltipState()
     val timerTooltipState = rememberTooltipState()
@@ -59,138 +65,153 @@ fun PigCard(
     val bodyTempFloat = pigBodyTemp.toDoubleOrNull() ?: 0.0
     val formattedBodyTemp = String.format(Locale.getDefault(), "%.1f", bodyTempFloat)
 
-    Row(
-        modifier = Modifier
-            .height(120.dp)
-            .fillMaxWidth()
-            .padding(6.dp)
+    Card(
+        onClick = {},
+        enabled = isActive,
+        shape = RectangleShape,
+        colors = CardDefaults.cardColors(
+            containerColor = Snow60,
+            disabledContentColor = Color.Gray,
+            disabledContainerColor = Platinum
+        ),
     ) {
         Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier
-                .fillMaxSize()
-                .padding(1.dp)
+                .height(120.dp)
+                .fillMaxWidth()
+                .padding(6.dp)
         ) {
             Row(
-                modifier = Modifier.weight(0.6f),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(1.dp)
             ) {
-                Column(
-                    modifier = Modifier
-                        .width(50.dp)
-                        .fillMaxHeight()
+                Row(
+                    modifier = Modifier.weight(0.6f),
                 ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.pig),
-                        modifier = Modifier.size(40.dp),
-                        contentDescription = null
-                    )
-                }
-
-                Column(
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    Row {
-                        Text(text = "Pig $pigID", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                    Column(
+                        modifier = Modifier
+                            .width(50.dp)
+                            .fillMaxHeight()
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.pig),
+                            modifier = Modifier.size(40.dp),
+                            contentDescription = null
+                        )
                     }
 
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Start,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(0.3f)
+                    Column(
+                        modifier = Modifier.fillMaxSize()
                     ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.weight(0.5f)
-                        ) {
-                            TooltipBox(
-                                positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
-                                tooltip = {
-                                    PlainTooltip {
-                                        Text(text = "Body Temperature of the Pig")
-                                    }
-                                },
-                                state = pigBodyTempTooltipState
-                            ) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.pig_bodytemp),
-                                    modifier = Modifier.size(35.dp),
-                                    contentDescription = null
-                                )
-                            }
-
-                            val txtColor = if (bodyTempFloat >= 40.0) Poppy
-                            else if (bodyTempFloat >= 38.0) Orange
-                            else Color.Black
-
-                            Text(text = "$formattedBodyTemp °C", color = txtColor)
-                        }
-
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.Center,
-                            modifier = Modifier.weight(0.5f)
-                        ) {
-                            TooltipBox(
-                                positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
-                                tooltip = {
-                                    PlainTooltip {
-                                        Text(text = "Timer of the sprinkler")
-                                    }
-                                },
-                                state = timerTooltipState
-                            ) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.timer),
-                                    modifier = Modifier.size(24.dp),
-                                    contentDescription = null
-                                )
-                            }
-
-                            viewModel.zeroPaddingTimer(timer = timer)
-                            Text(text = if (timer == 0) "--:--" else "${viewModel.minutesString} : ${viewModel.secondsString}")
-                        }
-                    }
-
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(0.4f)
-                    ) {
-                        TooltipBox(
-                            positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
-                            tooltip = {
-                                PlainTooltip {
-                                    Text(
-                                        text = "Count how often pig temperature reached 38°C or above today."
-                                    )
-                                }
-                            },
-                            state = counterTooltipState
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.counter),
-                                modifier = Modifier.size(27.dp),
-                                contentDescription = null
+                        Row {
+                            Text(
+                                text = "Pig $pigID",
+                                fontSize = 18.sp,
+                                fontWeight = FontWeight.Bold
                             )
                         }
 
-                        Spacer(modifier = Modifier.width(5.dp))
-                        Text(text = "$counter")
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Start,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .weight(0.3f)
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier.weight(0.5f)
+                            ) {
+                                TooltipBox(
+                                    positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
+                                    tooltip = {
+                                        PlainTooltip {
+                                            Text(text = "Body Temperature of the Pig")
+                                        }
+                                    },
+                                    state = pigBodyTempTooltipState
+                                ) {
+                                    Image(
+                                        painter = painterResource(id = R.drawable.pig_bodytemp),
+                                        modifier = Modifier.size(35.dp),
+                                        contentDescription = null
+                                    )
+                                }
+
+                                val txtColor = if (!isActive) Color.Gray
+                                else if (bodyTempFloat >= 40.0) Poppy
+                                else if (bodyTempFloat >= 38.0) Orange
+                                else Color.Black
+
+                                Text(text = if(!isActive) "--:--" else "$formattedBodyTemp °C", color = txtColor)
+                            }
+
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.Center,
+                                modifier = Modifier.weight(0.5f)
+                            ) {
+                                TooltipBox(
+                                    positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
+                                    tooltip = {
+                                        PlainTooltip {
+                                            Text(text = "Timer of the sprinkler")
+                                        }
+                                    },
+                                    state = timerTooltipState
+                                ) {
+                                    Image(
+                                        painter = painterResource(id = R.drawable.timer),
+                                        modifier = Modifier.size(24.dp),
+                                        contentDescription = null
+                                    )
+                                }
+
+                                viewModel.zeroPaddingTimer(timer = timer)
+                                Text(text = if (timer == 0) "--:--" else "${viewModel.minutesString} : ${viewModel.secondsString}")
+                            }
+                        }
+
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .weight(0.4f)
+                        ) {
+                            TooltipBox(
+                                positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
+                                tooltip = {
+                                    PlainTooltip {
+                                        Text(
+                                            text = "Count how often pig temperature reached 38°C or above today."
+                                        )
+                                    }
+                                },
+                                state = counterTooltipState
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.counter),
+                                    modifier = Modifier.size(27.dp),
+                                    contentDescription = null
+                                )
+                            }
+
+                            Spacer(modifier = Modifier.width(5.dp))
+                            Text(text = if(!isActive) "--:--" else "$counter")
+                        }
                     }
+
                 }
 
-            }
-
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.End,
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .weight(0.1f)
-            ) {
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.End,
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .weight(0.1f)
+                ) {
 //                Box {
 //                    Icon(
 //                        painter = painterResource(id = R.drawable.broom1),
@@ -200,36 +221,40 @@ fun PigCard(
 //                    )
 //                }
 
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    if(CurrentUserUID.getUID() == "8F8R3yapjONx6wshGhB84f9HOnS2") {
-                        Switch(
-                            checked = sprinklerSwitch,
-                            onCheckedChange = {
-                                viewModel.toggleSprinklerSwitch(
-                                    sprinklerSwitch,
-                                    pigID
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        if (CurrentUserUID.getUID() == "8F8R3yapjONx6wshGhB84f9HOnS2") {
+                            Switch(
+                                enabled = isActive,
+                                checked = sprinklerSwitch,
+                                onCheckedChange = {
+                                    viewModel.toggleSprinklerSwitch(
+                                        sprinklerSwitch,
+                                        pigID
+                                    )
+                                },
+                                thumbContent = {
+                                    Icon(
+                                        painter = painterResource(id = if (!sprinklerSwitch) R.drawable.shower_off else R.drawable.shower_on),
+                                        contentDescription = null,
+                                        modifier = Modifier.size(18.dp)
+                                    )
+                                },
+                                colors = SwitchDefaults.colors(
+                                    uncheckedTrackColor = Color.Gray,
+                                    uncheckedThumbColor = Snow60,
+                                    checkedTrackColor = LimeGreen,
+                                    checkedThumbColor = Snow60,
+                                    checkedIconColor = Color.Black,
+                                    uncheckedIconColor = Color.Gray,
+                                    disabledUncheckedTrackColor = Platinum,
+                                    disabledUncheckedBorderColor = Color.Gray
                                 )
-                            },
-                            thumbContent = {
-                                Icon(
-                                    painter = painterResource(id = if (!sprinklerSwitch) R.drawable.shower_off else R.drawable.shower_on),
-                                    contentDescription = null,
-                                    modifier = Modifier.size(18.dp)
-                                )
-                            },
-                            colors = SwitchDefaults.colors(
-                                uncheckedTrackColor = Color.Gray,
-                                uncheckedThumbColor = Snow60,
-                                checkedTrackColor = LimeGreen,
-                                checkedThumbColor = Snow60,
-                                checkedIconColor = Color.Black,
-                                uncheckedIconColor = Color.Gray
                             )
-                        )
+                        }
                     }
                 }
             }

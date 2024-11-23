@@ -15,7 +15,7 @@ class LoginRepository {
 
     fun loginUserRepo(email: String, password: String, context: MainActivity) {
         // Checks if the credentials are filled or not
-        if (email.isEmpty() && password.isEmpty()) {
+        if (email.isEmpty() || password.isEmpty()) {
             //If the credentials are empty this block will execute
             Toast.makeText(context, "Please enter Inputs", Toast.LENGTH_SHORT).show()
         } else {

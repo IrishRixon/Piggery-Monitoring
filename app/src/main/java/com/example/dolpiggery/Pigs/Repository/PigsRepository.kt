@@ -24,6 +24,7 @@ class PigsRepository {
                 var valveSwitch: Boolean
                 var counter: Int
                 var timer: Int
+                var isActive: Boolean
 
                 val pigsList = mutableListOf<PigsDataClass>()
 
@@ -34,8 +35,9 @@ class PigsRepository {
                         valveSwitch = pig.child("Valve_Switch").value.toString().toBoolean()
                         counter = pig.child("counter").child("count").value.toString().toInt()
                         timer = pig.child("timer").value.toString().toInt()
+                        isActive = pig.child("isActive").value.toString().toBoolean()
 
-                        val item = PigsDataClass(pigID, bodyTemp, valveSwitch, counter, timer)
+                        val item = PigsDataClass(pigID, bodyTemp, valveSwitch, counter, timer, isActive)
                         pigsList.add(item)
                         onDataChanged(pigsList)
                     }
