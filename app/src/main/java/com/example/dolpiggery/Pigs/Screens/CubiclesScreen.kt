@@ -47,7 +47,6 @@ fun PigsScreen(navController: NavHostController) {
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(10.dp)
         ) {
             // Iterate the cubicleList and invoke the CubicleCard Composables with the needed arguments
             items(viewModel.pigsList) {
@@ -58,7 +57,8 @@ fun PigsScreen(navController: NavHostController) {
                     pigBodyTemp = it.bodyTemp,
                     counter = it.counter,
                     timer = it.timer,
-                    isActive = it.isActive
+                    isActive = it.isActive,
+                    status = it.status
                 )
                 HorizontalDivider()
             }

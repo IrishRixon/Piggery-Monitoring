@@ -28,6 +28,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.dolpiggery.Navigation.NavigationCurrentPosition.NavigationCurrentPosition
@@ -36,6 +37,7 @@ import com.example.dolpiggery.Navigation.NavRoutes.AddAccount
 import com.example.dolpiggery.Navigation.NavRoutes.AddSched
 import com.example.dolpiggery.Navigation.NavRoutes.Cubicle
 import com.example.dolpiggery.Navigation.NavRoutes.Environment
+import com.example.dolpiggery.Navigation.NavRoutes.HealthHistory
 import com.example.dolpiggery.Navigation.NavRoutes.ManageAccounts
 import com.example.dolpiggery.Navigation.NavRoutes.Scheduling
 import com.example.dolpiggery.Navigation.NavRoutes.Settings
@@ -49,10 +51,17 @@ fun createNavBarItemsList(): List<NavBarItem> {
     // Create a list of nav buttons
     val items = listOf(
         NavBarItem(
-            title = "Pigs",
+            title = "Health monitoring",
             route = Cubicle,
             selectedIcon = R.drawable.filled_pig,
             unselectedIcon = R.drawable.outlined_pig,
+            hasNews = false
+        ),
+        NavBarItem(
+            title = "Health history",
+            route = HealthHistory,
+            selectedIcon = R.drawable.medical_report_filled,
+            unselectedIcon = R.drawable.medical_report,
             hasNews = false
         ),
         NavBarItem(
@@ -63,14 +72,13 @@ fun createNavBarItemsList(): List<NavBarItem> {
             hasNews = false
         ),
         NavBarItem(
-            title = "Settings",
+            title = "others",
             route = Settings,
             selectedIcon = R.drawable.filled_settings,
             unselectedIcon = R.drawable.outlined_settings,
             hasNews = false
         )
     )
-
     return items
 }
 
@@ -97,7 +105,7 @@ fun CreateNavBar(navController: NavHostController) {
                     navController.popBackStack()
                     navController.navigate(item.route) //navigate to the route assign to the clicked item
                 },
-                label = { Text(text = item.title) }, // assign the text of the label to the title of the item
+                label = { Text(text = item.title, textAlign = TextAlign.Center) }, // assign the text of the label to the title of the item
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = LightBlue30,
                     selectedTextColor = LightBlue30,

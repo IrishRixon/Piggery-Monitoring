@@ -34,3 +34,6 @@ data class AddAccount(
     val phoneNumber: String = "+639",
     val uid: String? = null
 )
+
+@Serializable
+object HealthHistory

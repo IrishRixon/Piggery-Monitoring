@@ -1,7 +1,9 @@
 package com.example.dolpiggery.MainScreen.UIComponents.Cards.CubicleCard
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -37,12 +39,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.dolpiggery.MainActivity.CurrentUserUID
+import com.example.dolpiggery.MainScreen.MainScreenContext
 import com.example.dolpiggery.Pigs.ViewModel.Cubicles.CubiclesViewModel
 import com.example.dolpiggery.R
 import com.example.dolpiggery.ui.theme.LimeGreen
 import com.example.dolpiggery.ui.theme.Orange
+import com.example.dolpiggery.ui.theme.PigmentGreen
 import com.example.dolpiggery.ui.theme.Platinum
 import com.example.dolpiggery.ui.theme.Poppy
+import com.example.dolpiggery.ui.theme.Silver
 import com.example.dolpiggery.ui.theme.Snow60
 import java.util.Locale
 
@@ -55,7 +60,8 @@ fun PigCard(
     sprinklerSwitch: Boolean,
     counter: Int,
     timer: Int,
-    isActive: Boolean
+    isActive: Boolean,
+    status: String
 ) {
 //    val viewModel: CubiclesViewModel = viewModel()
     val pigBodyTempTooltipState = rememberTooltipState()
@@ -66,13 +72,13 @@ fun PigCard(
     val formattedBodyTemp = String.format(Locale.getDefault(), "%.1f", bodyTempFloat)
 
     Card(
-        onClick = {},
-        enabled = isActive,
+        onClick = { if (!isActive) toast() },
+        enabled = true,
         shape = RectangleShape,
         colors = CardDefaults.cardColors(
-            containerColor = Snow60,
-            disabledContentColor = Color.Gray,
-            disabledContainerColor = Platinum
+            containerColor = if (isActive) Snow60 else Silver
+//            disabledContentColor = Color.Gray,
+//            disabledContainerColor = Platinum
         ),
     ) {
         Row(
@@ -145,12 +151,15 @@ fun PigCard(
                                 else if (bodyTempFloat >= 38.0) Orange
                                 else Color.Black
 
-                                Text(text = if(!isActive) "--:--" else "$formattedBodyTemp °C", color = txtColor)
+                                Text(
+                                    text = if (!isActive) "--:--" else "$formattedBodyTemp °C",
+                                    color = txtColor
+                                )
                             }
 
                             Row(
                                 verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.Center,
+                                horizontalArrangement = Arrangement.Start,
                                 modifier = Modifier.weight(0.5f)
                             ) {
                                 TooltipBox(
@@ -180,26 +189,53 @@ fun PigCard(
                                 .fillMaxWidth()
                                 .weight(0.4f)
                         ) {
-                            TooltipBox(
-                                positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
-                                tooltip = {
-                                    PlainTooltip {
-                                        Text(
-                                            text = "Count how often pig temperature reached 38°C or above today."
-                                        )
-                                    }
-                                },
-                                state = counterTooltipState
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier.weight(0.4f)
                             ) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.counter),
-                                    modifier = Modifier.size(27.dp),
-                                    contentDescription = null
-                                )
+                                TooltipBox(
+                                    positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
+                                    tooltip = {
+                                        PlainTooltip {
+                                            Text(
+                                                text = "Count how often pig temperature reached 38°C or above today."
+                                            )
+                                        }
+                                    },
+                                    state = counterTooltipState
+                                ) {
+                                    Image(
+                                        painter = painterResource(id = R.drawable.counter),
+                                        modifier = Modifier.size(27.dp),
+                                        contentDescription = null
+                                    )
+                                }
+                                Spacer(modifier = Modifier.width(5.dp))
+                                Text(text = if (!isActive) "--:--" else "$counter")
                             }
 
-                            Spacer(modifier = Modifier.width(5.dp))
-                            Text(text = if(!isActive) "--:--" else "$counter")
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier.weight(0.6f)
+                            ) {
+                                var status2 = if(!isActive) "--:--" else status
+                                var color: Color
+
+                                if(!isActive) {
+                                    color = Color.Black
+                                }
+                                else if(status == "Normal") {
+                                    color = PigmentGreen
+                                }
+                                else if(status == "Hot") {
+                                    color = Orange
+                                }
+                                else {
+                                    color = Poppy
+                                }
+                                Text(text = "Status: ", fontSize = 15.sp)
+                                Text(text = status2, fontSize = 13.sp, color = color)
+                            }
                         }
                     }
 
@@ -228,13 +264,17 @@ fun PigCard(
                     ) {
                         if (CurrentUserUID.getUID() == "8F8R3yapjONx6wshGhB84f9HOnS2") {
                             Switch(
-                                enabled = isActive,
+                                enabled = true,
                                 checked = sprinklerSwitch,
                                 onCheckedChange = {
-                                    viewModel.toggleSprinklerSwitch(
-                                        sprinklerSwitch,
-                                        pigID
-                                    )
+                                    if (!isActive) {
+                                        toast()
+                                    } else {
+                                        viewModel.toggleSprinklerSwitch(
+                                            sprinklerSwitch,
+                                            pigID
+                                        )
+                                    }
                                 },
                                 thumbContent = {
                                     Icon(
@@ -260,5 +300,13 @@ fun PigCard(
             }
         }
     }
+}
+
+fun toast() {
+    Toast.makeText(
+        MainScreenContext.getContext(),
+        "Pig is not active",
+        Toast.LENGTH_SHORT
+    ).show()
 }
 

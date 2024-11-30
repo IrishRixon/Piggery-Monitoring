@@ -32,16 +32,18 @@ import com.example.dolpiggery.ui.theme.DarkPastelGreen
 import com.example.dolpiggery.ui.theme.LimeGreen
 import com.example.dolpiggery.ui.theme.Platinum
 import com.example.dolpiggery.ui.theme.Poppy
+import com.example.dolpiggery.ui.theme.Silver
 import com.example.dolpiggery.ui.theme.Snow60
 import java.util.Locale
 
 @Composable
 fun TempCard(
     value: String,
+    isActive: Boolean
 ) {
     Card(
         colors = CardDefaults.cardColors(
-            containerColor = Platinum
+            containerColor = if(isActive) Platinum else Silver
         ),
         modifier = Modifier
             .height(100.dp)
@@ -86,11 +88,12 @@ fun TempCard(
 
 @Composable
 fun HumidityCard(
-    value: String
+    value: String,
+    isActive: Boolean
 ) {
     Card(
         colors = CardDefaults.cardColors(
-            containerColor = Platinum
+            containerColor = if(isActive) Platinum else Silver
         ),
         modifier = Modifier
             .height(100.dp)
@@ -134,11 +137,12 @@ fun HumidityCard(
 
 @Composable
 fun Heatindex(
-    value: String
+    value: String,
+    isActive: Boolean = false
 ) {
     Card(
         colors = CardDefaults.cardColors(
-            containerColor = Platinum
+            containerColor = if(isActive) Platinum else Silver
         ),
         modifier = Modifier
             .height(100.dp)
@@ -183,12 +187,17 @@ fun Heatindex(
 
 @Composable
 fun Clean(
-    value: Boolean
+    value: Boolean,
+    isActive: Boolean
 ) {
     var color: Color
     var txt: String
 
-    if(value) {
+    if(!isActive) {
+        color = Silver
+        txt = "--"
+    }
+    else if(value) {
         color = DarkPastelGreen
         txt = "Clean"
     }
@@ -227,7 +236,8 @@ fun Clean(
 @Composable
 fun WaterConsumpCard(
     daily: String,
-    monthly: String
+    monthly: String,
+    isActive: Boolean
 ) {
     val dailyFloat = daily.toDoubleOrNull() ?: 0.0
     val monthlyFloat = monthly.toDoubleOrNull() ?: 0.0
@@ -236,7 +246,7 @@ fun WaterConsumpCard(
 
     Card(
         colors = CardDefaults.cardColors(
-            containerColor = Platinum
+            containerColor = if(isActive) Platinum else Silver
         ),
         modifier = Modifier
             .height(200.dp)
