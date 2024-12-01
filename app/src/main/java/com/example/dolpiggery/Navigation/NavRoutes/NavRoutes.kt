@@ -37,3 +37,8 @@ data class AddAccount(
 
 @Serializable
 object HealthHistory
+
+@Serializable
+data class PigHealthHistory(
+    val pigID: Int
+)

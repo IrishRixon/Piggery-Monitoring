@@ -15,8 +15,10 @@ import com.example.dolpiggery.Navigation.NavRoutes.Settings
 import com.example.dolpiggery.Pigs.Screens.PigsScreen
 import com.example.dolpiggery.Environment.Screens.EnvironmentScreen
 import com.example.dolpiggery.HealthHistory.Screens.HealthHistoryScreen
+import com.example.dolpiggery.HealthHistory.Screens.PigHealthHistoryScreen.PigHealthHistoryScreen
 import com.example.dolpiggery.Navigation.NavRoutes.AddAccount
 import com.example.dolpiggery.Navigation.NavRoutes.HealthHistory
+import com.example.dolpiggery.Navigation.NavRoutes.PigHealthHistory
 import com.example.dolpiggery.Settings.Screens.ManageAccounts.ManageAccountsScreen.AddAccountScreen.AddAccountScreen
 import com.example.dolpiggery.Settings.Screens.ManageAccounts.ManageAccountsScreen.ManageAccountsScreen
 import com.example.dolpiggery.Settings.Screens.Scheduling.SchedulingScreen.AddSchedScreen.AddSchedScreen
@@ -78,7 +80,13 @@ fun AppNavGraph(navController: NavHostController) {
             )
         }
         composable<HealthHistory> {
-            HealthHistoryScreen()
+            HealthHistoryScreen(navController)
+        }
+        composable<PigHealthHistory> {
+            val args = it.toRoute<PigHealthHistory>()
+            val pigID = args.pigID
+
+            PigHealthHistoryScreen(pigID)
         }
     }
 }
